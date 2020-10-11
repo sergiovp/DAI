@@ -1,0 +1,3 @@
+# Especificamos bibliotecas/paquetes a ser instaladas de forma automática.
+
+flask == 1.1
