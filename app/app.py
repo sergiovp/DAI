@@ -63,3 +63,14 @@ def fibonacci(numero):
     num_fibo = ejercicios.sucesion_fibonacci(numero)
 
     return "El número " + numero + " ésimo de la sucesión de Fibonacci es: " + ''.join(str(num_fibo))
+
+@app.route('/corchetes/<corchetes>')
+def corchetes_balanceados(corchetes):
+    mensaje = " NO está balanceada"
+    
+    balanceada = ejercicios.is_balanceado(corchetes)
+
+    if (balanceada):
+        mensaje = " SÍ está balanceada"
+
+    return "La cadena " + corchetes + mensaje
