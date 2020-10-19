@@ -23,3 +23,19 @@ def seleccion_sort(vector):
 # Reemplazar las ',' de un string por espacios en blanco
 def clean_list(string):
     return string.replace(',', ' ')
+
+def criba_eratostenes(numero):
+    numero = int(numero)
+    primos = []
+    es_primo = [1 for i in range(numero)]
+    es_primo[0] = es_primo[1] = 0
+
+    for i in range(numero):
+        if es_primo[i]:
+            primos.append(i)
+            h = 2
+            while i * h < numero:
+                es_primo[i * h] = 0
+                h += 1
+
+    return primos

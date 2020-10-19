@@ -27,7 +27,7 @@ def bubble_sort(numeros):
 
     lista = ejercicios.burbuja_sort(lista)
 
-    return ''.join(str(lista))
+    return "El vector ordenado mediante burbuja: " + ''.join(str(lista))
 
 @app.route('/ordena_seleccion/<numeros>')
 def selection_sort(numeros):
@@ -49,4 +49,11 @@ def selection_sort(numeros):
 
     lista = ejercicios.seleccion_sort(lista)
 
-    return ''.join(str(lista))
+    return "El vector ordenado mediante selección: " + ''.join(str(lista))
+
+@app.route('/criba/<numero>')
+def criba(numero):
+    primos = []
+    primos = ejercicios.criba_eratostenes(numero)
+
+    return "Los números primos hasta " + numero + " son: " + ''.join(str(primos))
