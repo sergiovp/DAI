@@ -39,3 +39,17 @@ def criba_eratostenes(numero):
                 h += 1
 
     return primos
+
+def sucesion_fibonacci(numero):
+    numero = int(numero)
+    # First Fibonacci number is 0
+    if (numero == 1):
+        return 0
+
+    # Second Fibonacci number is 1
+    elif (numero == 2):
+        return 1
+
+    else:
+        return sucesion_fibonacci(numero - 1) + sucesion_fibonacci(numero - 2)
+    
