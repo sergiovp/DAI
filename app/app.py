@@ -74,3 +74,27 @@ def corchetes_balanceados(corchetes):
         mensaje = " SÍ está balanceada"
 
     return "La cadena " + corchetes + mensaje
+
+@app.route('/validar_correo/<correo>')
+def validar_correo(correo):
+    msg = "El correo " + correo + " NO es valido"
+    valido = ejercicios.check_correo(correo)
+
+    if (valido):
+        msg = "El correo " + correo + " SÍ es valido"
+    
+    return msg
+
+@app.route('/validar_tarjeta/<tarjeta>')
+def validar_tarjeta(tarjeta):
+    msg = "El número de tarjeta " + tarjeta + " NO es valido"
+    valido = ejercicios.check_tarjeta(tarjeta)
+
+    if (valido):
+        msg = "El número de tarjeta " + tarjeta + " SÍ es valido"
+
+    return msg
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Error 404"
