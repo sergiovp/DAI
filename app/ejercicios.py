@@ -89,13 +89,11 @@ def check_correo(correo):
     return False
 
 def check_tarjeta(tarjeta):
-    #^(?:[0-9]{4}-){3}[0-9]{4}|[0-9]{16}
-    #expresion = '^\d{4}-'
-    #expresion = '/[^\d]\d{4}[^\d]/'
-    #expresion = '^\d{4}\s{1}|-{1}'
-    #expresion = '(?:\d{4}-|\s?){3}\d{4}'
     expresion = '^\d{4}(?:-|\s)\d{4}(?:-|\s)\d{4}(?:-|\s)\d{4}$'
 
     if (re.search(expresion, tarjeta)):
         return True
     return False
+
+def check_palabra(palabra):
+    return

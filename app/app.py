@@ -95,6 +95,13 @@ def validar_tarjeta(tarjeta):
 
     return msg
 
+@app.route('/validar_palabra/<palabra>')
+def validar_palabra(palabra):
+    msg = "La palabra " + palabra + " NO es valida"
+    valida = ejercicios.check_palabra(palabra)
+
+    return palabra
+
 @app.errorhandler(404)
 def page_not_found(error):
     return "Error 404"
