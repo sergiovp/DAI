@@ -29,7 +29,6 @@ def clean_list(string):
 
 # Saca los números primos menores que un número dado
 def criba_eratostenes(numero):
-    numero = int(numero)
     primos = []
     es_primo = [1 for i in range(numero)]
     es_primo[0] = es_primo[1] = 0
@@ -46,12 +45,11 @@ def criba_eratostenes(numero):
 
 # Saca el n-ésimo número de la sucesión de Fibonacci
 def sucesion_fibonacci(numero):
-    numero = int(numero)
-    # First Fibonacci number is 0
+    # El primer número es un 0
     if (numero == 1):
         return 0
 
-    # Second Fibonacci number is 1
+    # El segundo número es un 1
     elif (numero == 2):
         return 1
 

@@ -51,18 +51,17 @@ def selection_sort(numeros):
 
     return "El vector ordenado mediante selección: " + ''.join(str(lista))
 
-@app.route('/criba/<numero>')
+@app.route('/criba/<int:numero>')
 def criba(numero):
     primos = []
     primos = ejercicios.criba_eratostenes(numero)
+    return "Los números primos hasta " + str(numero) + " son: " + ''.join(str(primos))
 
-    return "Los números primos hasta " + numero + " son: " + ''.join(str(primos))
-
-@app.route('/fibonacci/<numero>')
+@app.route('/fibonacci/<int:numero>')
 def fibonacci(numero):
     num_fibo = ejercicios.sucesion_fibonacci(numero)
 
-    return "El número " + numero + " ésimo de la sucesión de Fibonacci es: " + ''.join(str(num_fibo))
+    return "El número " + str(numero) + " ésimo de la sucesión de Fibonacci es: " + ''.join(str(num_fibo))
 
 @app.route('/corchetes/<corchetes>')
 def corchetes_balanceados(corchetes):
