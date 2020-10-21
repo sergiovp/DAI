@@ -100,7 +100,10 @@ def validar_palabra(palabra):
     msg = "La palabra " + palabra + " NO es valida"
     valida = ejercicios.check_palabra(palabra)
 
-    return palabra
+    if (valida):
+        msg = "La palabra " + palabra + " SÍ es valida"
+
+    return msg
 
 @app.errorhandler(404)
 def page_not_found(error):

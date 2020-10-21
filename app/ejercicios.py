@@ -96,4 +96,8 @@ def check_tarjeta(tarjeta):
     return False
 
 def check_palabra(palabra):
-    return
+    expresion = '^[A-Za-z]+ ([A-Z]){1}$'
+
+    if (re.search(expresion, palabra)):
+        return True
+    return False
