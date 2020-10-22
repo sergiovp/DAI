@@ -1,0 +1,86 @@
+body {
+    background-color: #c3d3d4;
+}
+
+.header-titulo {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.seccion_info_enlaces {
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.seccion_enlaces ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    text-align: center;
+}
+
+.seccion_enlaces a:link, a:visited {
+    background-color: cadetblue;
+    color: black;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin-bottom: 1.2em;
+    font-weight: bold;
+}
+
+
+.seccion_enlaces a:link, a:visited {
+    background-color: cadetblue;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.seccion_enlaces a:hover, a:active {
+    background-color: darkcyan;
+}
+
+/* Reglas para el Footer (Pie de página) */
+.pie_pagina {
+    margin-top: 1.2em;
+    border-top: solid;
+    border-width: thin;
+    background-color: #C1D0D9;
+    border-top-color: #8E9EBF;
+}
+
+.imagen_footer {
+    width: 1.2pc;
+    height: 1.2pc;
+}
+
+.pie_contacto {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.texto_contacto {
+    margin-left: 0.3em;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.seccion_contacto_footer {
+    display: flex;
+    align-items: center;
+}
+
+.mensaje_copy {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.seccion_copyright {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8em;
+}
