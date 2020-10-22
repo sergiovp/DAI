@@ -1,11 +1,12 @@
 import ejercicios
 
-from flask import Flask, Response
+from flask import Flask, render_template
 app = Flask(__name__)
           
 @app.route('/')
 def hola():
-    return 'Hola gente'
+    #return 'Hola gente'
+    return render_template('index.html')
 
 @app.route('/ordena_burbuja/<numeros>')
 def bubble_sort(numeros):
@@ -65,42 +66,42 @@ def fibonacci(numero):
 
 @app.route('/corchetes/<corchetes>')
 def corchetes_balanceados(corchetes):
-    mensaje = " NO está balanceada"
+    mensaje = "' NO está balanceada"
     
     balanceada = ejercicios.is_balanceado(corchetes)
 
     if (balanceada):
-        mensaje = " SÍ está balanceada"
+        mensaje = "' SÍ está balanceada"
 
-    return "La cadena " + corchetes + mensaje
+    return "La cadena '" + corchetes + mensaje
 
 @app.route('/validar_correo/<correo>')
 def validar_correo(correo):
-    msg = "El correo " + correo + " NO es valido"
+    msg = "El correo '" + correo + "' NO es valido"
     valido = ejercicios.check_correo(correo)
 
     if (valido):
-        msg = "El correo " + correo + " SÍ es valido"
+        msg = "El correo '" + correo + "' SÍ es valido"
     
     return msg
 
 @app.route('/validar_tarjeta/<tarjeta>')
 def validar_tarjeta(tarjeta):
-    msg = "El número de tarjeta " + tarjeta + " NO es valido"
+    msg = "El número de tarjeta '" + tarjeta + "' NO es valido"
     valido = ejercicios.check_tarjeta(tarjeta)
 
     if (valido):
-        msg = "El número de tarjeta " + tarjeta + " SÍ es valido"
+        msg = "El número de tarjeta '" + tarjeta + "' SÍ es valido"
 
     return msg
 
 @app.route('/validar_palabra/<palabra>')
 def validar_palabra(palabra):
-    msg = "La palabra " + palabra + " NO es valida"
+    msg = "La palabra '" + palabra + "' NO es valida"
     valida = ejercicios.check_palabra(palabra)
 
     if (valida):
-        msg = "La palabra " + palabra + " SÍ es valida"
+        msg = "La palabra '" + palabra + "' SÍ es valida"
 
     return msg
 
