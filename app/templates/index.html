@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilo.css') }}">
+    <title>Inicio</title>
+</head>
+<body>
+    <header>
+        <div class="header-titulo">
+            <h1>Práctica múmero 2</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="seccion_info_enlaces">
+                <p>Puedes acceder a los siguientes enlaces:</p>
+            </div>
+            <div class="seccion_enlaces">
+                <ul>
+                    <li><a href="ordena_burbuja/4,3,10,-7,8,77,101,27,7,-26">Ordena burbuja</a></li>
+                    <li><a href="ordena_seleccion/17,23,0,-14,15,33,77,24,-41">Ordena selección</a></li>
+                    <li><a href="criba/100">Criba</a></li>
+                    <li><a href="fibonacci/7">Fibonacci</a></li>
+                    <li><a href="corchetes/[[][][[]]]">Corchetes</a></li>
+                    <li><a href="validar_correo/sergiovp96@gmail.com">Validar correo</a></li>
+                    <li><a href="validar_tarjeta/1234-1234-1234-1234">Validar tarjeta</a></li>
+                    <li><a href="validar_palabra/sergio V">Validar palabra</a></li>
+                    <li><a href="svg">Figuras aleatorias SVG</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+<footer class="pie_pagina">
+    <div class="pie_contacto">
+        <section class="seccion_contacto_footer">
+            <img class="imagen_footer" src="{{ url_for('static', filename='images/gmail.png') }}" alt="Icono email">
+            <p class="texto_contacto">sergiovp96@gmail.com</p>
+        </section>
+
+        <section class="seccion_contacto_footer">
+            <img class="imagen_footer" src="{{ url_for('static', filename='images/github.png') }}" alt="Icono GitHub">
+            <p class="texto_contacto">@sergiovp</p>
+        </section>
+    </div>
+
+    <section class="seccion_copyright">
+        <p class="mensaje_copy">Copyright © Todos los derechos reservados al autor Sergio Vela Pelegrina</p>
+    </section>
+</footer>
+</html>
