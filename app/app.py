@@ -1,6 +1,6 @@
 import ejercicios
 
-from flask import Flask
+from flask import Flask, Response
 app = Flask(__name__)
           
 @app.route('/')
@@ -104,6 +104,11 @@ def validar_palabra(palabra):
 
     return msg
 
+@app.route('/svg')
+def svg():
+    figura = ejercicios.crear_figura()
+    return figura
+
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Error 404"
+    return "Página no encontrada", 404

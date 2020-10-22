@@ -1,6 +1,9 @@
 # Para el ejercicio de expresiones regulares:
 import re
 
+# Para el random
+import random
+
 # Ordenar vector usando burbuja
 def burbuja_sort(vector):
     n = len(vector)
@@ -99,3 +102,31 @@ def check_palabra(palabra):
     if (re.search(expresion, palabra)):
         return True
     return False
+
+def crear_figura():
+    colores = ['azure', 'coral', 'darkslategray', 'dodgerblue', 'indigo', 'lightgreen',
+    'lightseagreen', 'lightsteelblue', 'midnightblue', 'plum', 'violet', 'palegreen',
+    'mediumseagreen']
+
+    # Propiedades círculo
+    color_c = random.choice(colores)
+    borde_c = random.choice(colores)
+    cx = random.randrange(50, 1315)
+    cy = random.randrange(50, 655)
+    r = random.randrange(30, 200)
+
+    # Propiedades rectángulo
+    color_r = random.choice(colores)
+    borde_r = random.choice(colores)
+    rx = random.randrange(0, 1200)
+    ry = random.randrange(50, 655)
+    width = random.randrange(50, 400)
+    height = random.randrange(50, 300)
+
+    svg_start = '<svg width="1315" height="655">'
+    svg_circle = '<circle cx="'+str(cx)+'" cy="'+str(cy)+'" r="'+str(r)+'" stroke="'+borde_r+'" stroke-width="1" fill="'+color_r+'" />'
+    svg_end = '</svg>'
+    
+    svg_rectangle = '<rect x="'+str(rx)+'" y="'+str(ry)+'"  width="'+str(width)+'" height="'+str(height)+'"fill="'+color_c+'"stroke="'+borde_c+'"/>'
+
+    return svg_start + svg_circle + svg_rectangle + svg_end
