@@ -5,8 +5,8 @@ app = Flask(__name__)
           
 @app.route('/')
 def hola():
-    #return 'Hola gente'
-    return render_template('index.html')
+    return '<h1>Hola gente</h1>'
+    #return render_template('index.html')
 
 @app.route('/ordena_burbuja/<numeros>')
 def bubble_sort(numeros):
@@ -112,4 +112,4 @@ def svg():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Página no encontrada", 404
+    return "<h1 style=\"color:red; text-align:center\";>Página no encontrada</h1>", 404
