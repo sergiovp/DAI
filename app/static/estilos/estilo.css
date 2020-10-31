@@ -1,0 +1,27 @@
+.navbar.navbar-expand-lg.navbar-light {
+    background-color: #e3f2fd;
+}
+
+/* Reglas para el Footer (Pie de página) */
+.pie_pagina {
+    background-color: #e3f2fd;
+}
+
+.pie_contacto {
+    text-align: center;
+}
+
+.seccion_copyright {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.btn-toolbar {
+    display: block;
+    text-align: center;
+}
+
+#footer-botones {
+    display: list-item;
+}
