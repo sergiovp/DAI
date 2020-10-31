@@ -8,11 +8,14 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
         crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilo.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+        crossorigin="anonymous">
     <title>{% block titulo %}Bienvenido{% endblock %}</title>
     
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
             <img src="{{ url_for('static', filename='images/usuario.png') }}"
             width="30" height="30" alt="Imagen con el logo">
@@ -23,12 +26,16 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Link1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link2</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#"
@@ -55,16 +62,52 @@
                         <a class="dropdown-item" href="#">Figuras SVG</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                
+                <!--<li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
+                </li>-->
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a role="button" href="#" type="button" class="btn btn-outline-success">LogIn</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <a role="button" href="#" type="button" class="btn btn-outline-dark">Regístrate</a>
+                </div>
+            </div>
         </div>
     </nav>
+
+   <h1>Aquí irán los contenidos...</h1>
+
+    <footer class="pie_pagina">
+        <nav class="navbar navbar-expand-lg navbar-light" id="footer-botones">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a target="_blank role="button" href="https://github.com/sergiovp"
+                        type="button" class="btn btn-outline-dark"><i class="fab fa-github-square"></i>
+                    </a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a target="_blank" role="button" href="https://www.linkedin.com/in/sergio-vela-pelegrina-8015721b4"
+                        type="button" class="btn btn-outline-primary"><i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <a target="_blank role="button" href="https://www.instagram.com/sergiovela7/"
+                    type="button" class="btn btn-outline-danger"><i class="fab fa-instagram"></i>
+                </a>
+                </div>
+            </div>    
+        </nav>
+
+        <section class="seccion_copyright">
+            <p class="mensaje_copy">Copyright © Todos los derechos reservados al
+                autor Sergio Vela Pelegrina (sergiovp96@gmail.com)</p>
+        </section>
+    </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
