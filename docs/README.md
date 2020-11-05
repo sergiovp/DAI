@@ -56,3 +56,17 @@ Los ejercicios propuestos para esta práctica son los siguientes:
 3. Crear una página para el caso en que una URL no esté definida (error HTTP 404, not found).
 
 Para más detalle sobre la práctica, consultad [este enlace](https://swad.ugr.es/swad/tmp/Gh/CxSslYczx9vm9CRv20lg1QX-osPNX4qM55FaguO4Q/DAI%20Practica%202%20-%20Microframework%20Flask.html).
+
+## Práctica 3. Plantillas, Manejo de Sesiones y Frameworks CSS
+
+Se propone avanzar en el uso de Flask. Eneste caso incluiremos el uso de un motor de plantillas, *Jinja*. Dicho motor se encuentra incorporado en Flask. Haremos uso de un flamework de CSS para hacer que el HTML sea adaptable y utilizaremos sesiones para gestionar la identificación de usuarios en la aplicación.
+
+En resumen, las herramientas que utilizaremos son las siguientes:
+
++ Framework aplicación web: **Flask**
++ Motor de plantillas: **Jinja** (incorporado en Flask)
++ Framework CSS: **Bootstrap**
++ Almacenamiento local: **pickleshare**
+
+Tras la realización de la práctica, la web deberá incluir una barra de navegación dando la opción de logearse o registrarse a los usuarios, así como enlaces a otras páginas.
+Un aside o menú lateral junto a un espacio para mostrar contenidos y un footer al final de la web.
