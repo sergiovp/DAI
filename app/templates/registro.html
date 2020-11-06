@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %}Regístrate{% endblock %}
+
+{%block addlink %}
+<link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilologin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='images/usuario.png') }}"
+                width="30" height="30" alt="Imagen con el logo">
+            </a>
+        </div>
+
+        <!-- Login Form -->
+        <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Correo electrónico...">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario...">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña...">
+            <input type="submit" class="fadeIn fourth" value="Regístrate">
+        </form>
+
+        <!-- Volver atrás -->
+        <div id="formFooter">
+            <a class="underlineHover" href="/index">Volver atrás</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
