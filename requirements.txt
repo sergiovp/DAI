@@ -1,3 +1,4 @@
 # Especificamos bibliotecas/paquetes a ser instaladas de forma automática.
 
 flask == 1.1
+pickleshare == 0.7.5
