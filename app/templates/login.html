@@ -22,14 +22,14 @@
 
         <!-- Login Form -->
         <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario...">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña...">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+            <input type="text" id="login" class="fadeIn second" name="usuario" placeholder="Usuario...">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña...">
+            <input type="submit" class="fadeIn fourth" value="LogIn">
         </form>
 
         <!-- Volver atrás -->
         <div id="formFooter">
-            <a class="underlineHover" href="/index">Volver atrás</a>
+            <a class="underlineHover" href="{{ url_for('index') }}">Volver atrás</a>
         </div>
 
     </div>
