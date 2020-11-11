@@ -1,0 +1,18 @@
+{% extends "base_form.html" %}
+{% block titulo %}LogIn{% endblock %}
+
+{% block formulario %}
+        <form>
+            <input type="text" id="login" class="fadeIn second"
+                name="usuario" placeholder="{{ usuario }}" value="{{ usuario }}" disabled>
+            <input type="password" id="password" class="fadeIn third"
+                name="password" placeholder="{{ password }}" value="{{ password }}" disabled>
+        </form>
+{% endblock %}
+
+{% block volver_atras %}
+    <div id="formFooter">
+        <a class="underlineHover" href="{{ url_for('index') }}">Modificar datos</a> | 
+        <a class="underlineHover" href="{{ url_for('index') }}">Volver atrás</a>
+    </div>
+{% endblock %}
