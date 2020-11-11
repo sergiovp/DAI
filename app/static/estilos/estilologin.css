@@ -257,3 +257,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 .error {
     color: red;
 }
+
+.mensaje {
+    color: green;
+}
