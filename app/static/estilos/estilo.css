@@ -30,3 +30,22 @@
 .hola {
     border: solid;
 }
+
+/* Formulario ejercicios */
+.form-blok {
+    text-align: center;
+}
+
+.nombre-usuario {
+    text-decoration: underline;
+    margin-right: 2em;
+}
+
+#mensaje-bienvenida {
+    margin-top: 1rem;
+}
+
+#mensaje-bienvenida span {
+    color: blue;
+    font-size: 1.2rem;
+}
