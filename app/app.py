@@ -1,137 +1,22 @@
+'''
+Sergio Vela Pelegrina.
+
+Desarrollo de Aplicaciones para Internet.
+
+Ingeniería Informática UGR (2020/21).
+'''
+
 from flask import Flask, flash, redirect, render_template, \
     request, url_for, session
-from pickleshare import *
 import ejercicios
+import model
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-          
-@app.route('/')
-@app.route('/index')
-def index():
-    usuario = password = ''
-    
-    if 'usuario' in session:
-        usuario = session['usuario']
 
-    if 'password' in session:
-        password = session['password']
-    
-    return render_template('index.html', usuario = usuario )
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    usuario = None
-    data_base = PickleShareDB('usuarios_db')
-
-    if (request.method == 'POST'):
-        usuario = request.form['usuario']
-        password = request.form['password']
-
-        # Si existe el usuario...
-        if (usuario in data_base.keys()):
-
-            # Si la contraseña del usuario coincide...
-            if (password == data_base[usuario].get('password')):
-                session['usuario'] = usuario
-                session['password'] = password
-                
-                return render_template('index.html', usuario = usuario)
-            # No coincide la contrasela...
-            else:
-                error = 'Contraseña incorrecta'
-        # No existe el usuario
-        else:
-            error = 'El usuario no existe'
-
-    return render_template('login.html', error = error)
-
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
-    error = None
-    data_base = PickleShareDB('usuarios_db')
-
-    if (request.method == 'POST'):
-        usuario = request.form['usuario']
-        password = request.form['password']
-
-        # Si el usuario existe deberemos elegir otro
-        if (usuario in data_base.keys()):
-            error = 'Nombre de usuario en uso, elige otro.'
-        # El usuario introducido no existe
-        else:
-            # Almacenamos usuario en la BD
-            data_base[usuario] = {'password': password}
-            
-            # Establecemos la sesión, guardando el user y la pass
-            session['usuario'] = usuario
-            session['password'] = password
-            
-            return render_template('index.html', usuario = usuario)
-
-    return render_template('registro.html', error = error)
-
-@app.route('/ver_datos')
-def ver_datos():
-    usuario = password = ''
-    
-    if 'usuario' in session:
-        usuario = session['usuario']
-
-    if 'password' in session:
-        password = session['password']
-
-    return render_template('ver_datos.html', usuario = usuario, password = password)
-
-# A estemétodo le debe de llegar el POST y cambiar los datos.
-@app.route('/modificar_datos', methods=['GET', 'POST'])
-def modificar_datos():
-    data_base = PickleShareDB('usuarios_db')
-    usuario = session['usuario']
-    password = session['password']
-    mensaje = 'Datos modificados correctamente'
-    error = None
-
-    # Hago las modificaciones oportunas
-    if (request.method == 'POST'):
-
-        if (request.form['usuario'] != session['usuario']):
-            usuario = request.form['usuario']
-            if (usuario in data_base.keys()):
-                error = 'Nombre de usuario en uso, elige otro.'
-                return render_template('modificar_datos.html', 
-                usuario=session['usuario'], password=session['password'], error=error)
-
-        if (request.form['password'] != session['password']):
-            password = request.form['password']
-
-        del data_base[session['usuario']]
-        data_base[usuario] = {'password': password}
-        session.clear()
-        session['usuario'] = usuario
-        session['password'] = password
-        
-        return render_template('modificar_datos.html', usuario=usuario, password=password, mensaje=mensaje)
-    
-    # Muestro los datos actuales
-    else:
-        render_template('modificar_datos.html', usuario = usuario, password = password)
-
-        #if (usuario):
-        #    data_base[session['usuario']] = usuario
-    return render_template('modificar_datos.html', usuario = usuario, password = password)
-
-@app.route('/logout')
-def logout():
-    session.pop('usuario')
-    session.pop('password')
-    return redirect(url_for('index'))
-
-@app.route('/interfaz_ejercicios/<ejercicio>')
-def interfaz_ejercicios(ejercicio):
-    return render_template('interfaz_ejercicios.html', ejercicio=ejercicio)
-    
+############################
+# Práctica 1 y 2:
+############################
 
 @app.route('/ordena_burbuja/<numeros>')
 def bubble_sort(numeros):
@@ -234,6 +119,137 @@ def validar_palabra(palabra):
 def svg():
     figura = ejercicios.crear_figura()
     return figura
+
+############################
+# Práctica 3:
+############################
+
+def start_session(usuario, password):
+    session['usuario'] = usuario
+    session['password'] = password
+
+@app.route('/')
+@app.route('/index')
+def index():
+    usuario = password = ''
+    
+    if 'usuario' in session:
+        usuario = session['usuario']
+
+    if 'password' in session:
+        password = session['password']
+    
+    return render_template('index.html', usuario = usuario )
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    usuario = None
+
+    if (request.method == 'POST'):
+        usuario = request.form['usuario']
+        password = request.form['password']
+
+        # Si existe el usuario...
+        if (model.check_key_exists(usuario)):
+
+            # Si la contraseña del usuario coincide...
+            if (model.check_password(usuario, password)):
+                start_session(usuario, password)
+                return render_template('index.html', usuario = usuario)
+            # No coincide la contrasela...
+            else:
+                error = 'Contraseña incorrecta'
+        # No existe el usuario
+        else:
+            error = 'El usuario no existe'
+
+    return render_template('login.html', error = error)
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    error = None
+
+    if (request.method == 'POST'):
+        usuario = request.form['usuario']
+        password = request.form['password']
+
+        # Si el usuario existe deberemos elegir otro
+        if (model.check_key_exists(usuario)):
+            error = 'Nombre de usuario en uso, elige otro.'
+        # El usuario introducido no existe
+        else:
+            # Almacenamos usuario en la BD
+            model.store_user(usuario, password)
+            
+            # Establecemos la sesión, guardando el user y la pass
+            start_session(usuario, password)
+            
+            return render_template('index.html', usuario = usuario)
+
+    return render_template('registro.html', error = error)
+
+@app.route('/ver_datos')
+def ver_datos():
+    usuario = password = ''
+    
+    if 'usuario' in session:
+        usuario = session['usuario']
+
+    if 'password' in session:
+        password = session['password']
+
+    return render_template('ver_datos.html', usuario = usuario, password = password)
+
+# A este método le debe de llegar el POST y cambiar los datos.
+@app.route('/modificar_datos', methods=['GET', 'POST'])
+def modificar_datos():
+    #data_base = model.start_db()
+    usuario = session['usuario']
+    password = session['password']
+    mensaje = 'Datos modificados correctamente'
+    error = None
+
+    # Hago las modificaciones oportunas
+    if (request.method == 'POST'):
+
+        if (request.form['usuario'] != session['usuario']):
+            usuario = request.form['usuario']
+
+            if (model.check_key_exists(usuario)):
+                error = 'Nombre de usuario en uso, elige otro.'
+                return render_template('modificar_datos.html', 
+                usuario = session['usuario'], password = session['password'], error = error)
+
+        if (request.form['password'] != session['password']):
+            password = request.form['password']
+
+        model.delete_user(session['usuario'])
+
+        model.update_user_pass(usuario, password)
+        session.clear()
+        start_session(usuario, password)
+        
+        return render_template('modificar_datos.html',
+        usuario = usuario, password = password, mensaje = mensaje)
+    
+    # Muestro los datos actuales
+    else:
+        render_template('modificar_datos.html', usuario = usuario, password = password)
+
+        #if (usuario):
+        #    data_base[session['usuario']] = usuario
+    return render_template('modificar_datos.html', usuario = usuario, password = password)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+@app.route('/interfaz_ejercicios/<ejercicio>')
+def interfaz_ejercicios(ejercicio):
+    return render_template('interfaz_ejercicios.html', ejercicio=ejercicio)
+
 
 @app.errorhandler(404)
 def page_not_found(error):
