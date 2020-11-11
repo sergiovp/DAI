@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titulo %}{% endblock %}
+
+{%block addlink %}
+<link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilologin.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='images/usuario.png') }}"
+                width="30" height="30" alt="Imagen con el logo">
+            </a>
+        </div>
+
+        <!-- Login Form -->
+        {% block formulario %}
+        <form method="POST">
+            <input type="text" id="login" class="fadeIn second"
+                name="usuario" placeholder="Usuario..." value="{{request.form.username }}">
+            <input type="password" id="password" class="fadeIn third"
+                name="password" placeholder="Contraseña...">
+            <input type="submit" class="fadeIn fourth" value="LogIn">
+        </form>
+        {% endblock %}
+        {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
+
+        <!-- Volver atrás -->
+        {% block volver_atras %}
+        <div id="formFooter">
+            <a class="underlineHover" href="{{ url_for('index') }}">Volver atrás</a>
+        </div>
+        {% endblock %}
+
+    </div>
+</div>
+{% endblock %}
