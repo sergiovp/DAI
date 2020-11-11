@@ -105,9 +105,11 @@
             
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 {% if usuario %}
-                <div id="bienvenida-boton" class="btn-group mr-2" role="group" aria-label="First group">
-                        <p class="mensaje-bienvenida">Bienvenido <span class="nombre-usuario">{{ usuario }}</span></p>
-                        <a role="button" href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">LogOut</a>
+                <div class="btn-group mr-1">
+                    <p id="mensaje-bienvenida">Bienvenido <span class="nombre-usuario">{{ usuario }}</span></p>
+                </div>
+                <div id="bienvenida-boton" class="btn-group mr-2" role="group" aria-label="First group">   
+                    <a role="button" href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">LogOut</a>
                 </div>
                 {% else %}
                 <div class="btn-group mr-2" role="group" aria-label="First group">
