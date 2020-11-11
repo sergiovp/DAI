@@ -1,12 +1,112 @@
-from flask import Flask, render_template
+from flask import Flask, flash, redirect, render_template, \
+    request, url_for, session
+from pickleshare import *
 import ejercicios
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
           
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', titulo = 'Inicio')
+    usuario = password = ''
+    
+    if 'usuario' in session:
+        usuario = session['usuario']
+
+    if 'password' in session:
+        password = session['password']
+    
+    return render_template('index.html', usuario = usuario )
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    usuario = None
+    data_base = PickleShareDB('usuarios_db')
+
+    if (request.method == 'POST'):
+        usuario = request.form['usuario']
+        password = request.form['password']
+
+        # Si existe el usuario...
+        if (usuario in data_base.keys()):
+
+            # Si la contraseña del usuario coincide...
+            if (password == data_base[usuario].get('password')):
+                session['usuario'] = usuario
+                session['password'] = password
+                
+                return render_template('index.html', usuario = usuario)
+            # No coincide la contrasela...
+            else:
+                error = 'Contraseña incorrecta'
+        # No existe el usuario
+        else:
+            error = 'El usuario no existe'
+
+    return render_template('login.html', error = error)
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    error = None
+    data_base = PickleShareDB('usuarios_db')
+
+    if (request.method == 'POST'):
+        usuario = request.form['usuario']
+        password = request.form['password']
+
+        # Si el usuario existe deberemos elegir otro
+        if (usuario in data_base.keys()):
+            error = 'Usuario existente, elige otro'
+        # El usuario introducido no existe
+        else:
+            # Almacenamos usuario en la BD
+            data_base[usuario] = {'password': password}
+            
+            # Establecemos la sesión, guardando el user y la pass
+            session['usuario'] = usuario
+            session['password'] = password
+            
+            return render_template('index.html', usuario = usuario)
+
+    return render_template('registro.html', error = error)
+
+@app.route('/ver_datos')
+def ver_datos():
+    usuario = password = ''
+    
+    if 'usuario' in session:
+        usuario = session['usuario']
+
+    if 'password' in session:
+        password = session['password']
+
+    return render_template('ver_datos.html', usuario = usuario, password = password)
+
+# A estemétodo le debe de llegar el POST y cambiar los datos.
+@app.route('/modificar_datos')
+def modificar_datos():
+    usuario = password = ''
+    
+    if 'usuario' in session:
+        usuario = session['usuario']
+
+    if 'password' in session:
+        password = session['password']
+
+    return render_template('modificar_datos.html', usuario = usuario, password = password)
+
+@app.route('/logout')
+def logout():
+    session.pop('usuario')
+    session.pop('password')
+    return redirect(url_for('index'))
+
+@app.route('/interfaz_ejercicios/<ejercicio>')
+def interfaz_ejercicios(ejercicio):
+    return render_template('interfaz_ejercicios.html', ejercicio=ejercicio)
+    
 
 @app.route('/ordena_burbuja/<numeros>')
 def bubble_sort(numeros):
@@ -52,7 +152,7 @@ def selection_sort(numeros):
 
     return "El vector ordenado mediante selección: " + ''.join(str(lista))
 
-@app.route('/criba/<int:numero>')
+@app.route('/criba', methods=['GET'])
 def criba(numero):
     primos = []
     primos = ejercicios.criba_eratostenes(numero)
