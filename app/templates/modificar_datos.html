@@ -1,0 +1,12 @@
+{% extends "base_form.html" %}
+{% block titulo %}LogIn{% endblock %}
+
+{% block formulario %}
+    <form method="POST">
+        <input type="text" id="login" class="fadeIn second"
+            name="usuario" value="{{ usuario}}">
+        <input type="password" id="password" class="fadeIn third"
+            name="password" placeholder="" value="{{ password }}">
+        <input type="submit" class="fadeIn fourth" value="Modificar">
+    </form>
+{% endblock %}
