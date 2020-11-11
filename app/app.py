@@ -58,7 +58,7 @@ def registro():
 
         # Si el usuario existe deberemos elegir otro
         if (usuario in data_base.keys()):
-            error = 'Usuario existente, elige otro'
+            error = 'Nombre de usuario en uso, elige otro.'
         # El usuario introducido no existe
         else:
             # Almacenamos usuario en la BD
@@ -85,16 +85,41 @@ def ver_datos():
     return render_template('ver_datos.html', usuario = usuario, password = password)
 
 # A estemétodo le debe de llegar el POST y cambiar los datos.
-@app.route('/modificar_datos')
+@app.route('/modificar_datos', methods=['GET', 'POST'])
 def modificar_datos():
-    usuario = password = ''
+    data_base = PickleShareDB('usuarios_db')
+    usuario = session['usuario']
+    password = session['password']
+    mensaje = 'Datos modificados correctamente'
+    error = None
+
+    # Hago las modificaciones oportunas
+    if (request.method == 'POST'):
+
+        if (request.form['usuario'] != session['usuario']):
+            usuario = request.form['usuario']
+            if (usuario in data_base.keys()):
+                error = 'Nombre de usuario en uso, elige otro.'
+                return render_template('modificar_datos.html', 
+                usuario=session['usuario'], password=session['password'], error=error)
+
+        if (request.form['password'] != session['password']):
+            password = request.form['password']
+
+        del data_base[session['usuario']]
+        data_base[usuario] = {'password': password}
+        session.clear()
+        session['usuario'] = usuario
+        session['password'] = password
+        
+        return render_template('modificar_datos.html', usuario=usuario, password=password, mensaje=mensaje)
     
-    if 'usuario' in session:
-        usuario = session['usuario']
+    # Muestro los datos actuales
+    else:
+        render_template('modificar_datos.html', usuario = usuario, password = password)
 
-    if 'password' in session:
-        password = session['password']
-
+        #if (usuario):
+        #    data_base[session['usuario']] = usuario
     return render_template('modificar_datos.html', usuario = usuario, password = password)
 
 @app.route('/logout')
