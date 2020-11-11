@@ -1,39 +1,12 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
+{% block titulo %}Registro{% endblock %}
 
-{% block titulo %}Regístrate{% endblock %}
-
-{%block addlink %}
-<link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilologin.css') }}">
-{% endblock %}
-
-{% block body %}
-
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Icon -->
-        <div class="fadeIn first">
-            <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='images/usuario.png') }}"
-                width="30" height="30" alt="Imagen con el logo">
-            </a>
-        </div>
-
-        <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Correo electrónico...">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario...">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña...">
-            <input type="submit" class="fadeIn fourth" value="Regístrate">
+{% block formulario %}
+        <form method="POST">
+            <input type="text" id="login" class="fadeIn second"
+                name="usuario" placeholder="Usuario..." value="{{request.form.username }}">
+            <input type="password" id="password" class="fadeIn third"
+                name="password" placeholder="Contraseña...">
+            <input type="submit" class="fadeIn fourth" value="Registro">
         </form>
-
-        <!-- Volver atrás -->
-        <div id="formFooter">
-            <a class="underlineHover" href="/index">Volver atrás</a>
-        </div>
-
-    </div>
-</div>
-
 {% endblock %}
