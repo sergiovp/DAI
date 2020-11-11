@@ -13,8 +13,21 @@
         crossorigin="anonymous">
     <title>{% block titulo %}Bienvenido{% endblock %}</title>
     
+    <!--El siguiente bloque es por si es necesario añadir algún link en alguna página-->
+    {%block addlink %}{% endblock %}
+    
 </head>
 <body>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% block body %}
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
             <img src="{{ url_for('static', filename='images/usuario.png') }}"
@@ -43,38 +56,67 @@
                         aria-haspopup="true" aria-expanded="false">Ejercicios 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Ordena burbuja</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='burbuja')}}">Ordena burbuja
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Ordena selección</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='seleccion')}}">Ordena selección
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Criba</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='criba')}}">Criba
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Fibonacci</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='fibonacci')}}">Fibonacci
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Corchetes</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='corchetes')}}">Corchetes
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Validar correo</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='correo')}}">Validar correo
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Validar tarjeta</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='tarjeta')}}">Validar tarjeta
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Validar palabra</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='palabra')}}">Validar palabra
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Figuras SVG</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', ejercicio='svg')}}">Figuras SVG
+                        </a>
                     </div>
                 </li>
-                
-                <!--<li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>-->
+                {% if usuario %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('ver_datos')}}">Mis datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('modificar_datos')}}">Modificar mis datos</a>
+                </li>
+                {% endif %}
             </ul>
             
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                {% if usuario %}
+                <div id="bienvenida-boton" class="btn-group mr-2" role="group" aria-label="First group">
+                        <p class="mensaje-bienvenida">Bienvenido <span class="nombre-usuario">{{ usuario }}</span></p>
+                        <a role="button" href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">LogOut</a>
+                </div>
+                {% else %}
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <a role="button" href="#" type="button" class="btn btn-outline-success">LogIn</a>
+                    <a role="button" href="{{ url_for('login') }}" type="button" class="btn btn-outline-success">LogIn</a>
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                    <a role="button" href="#" type="button" class="btn btn-outline-dark">Regístrate</a>
+                    <a role="button" href="{{ url_for('registro') }}" type="button" class="btn btn-outline-dark">Regístrate</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -96,6 +138,8 @@
        </div>
    </div>
 
+   <!--Footer. Será el mismo para todas las páginas (heredado) salvo registro y login-->
+   {% block footer %}
     <footer class="pie_pagina">
         <nav class="navbar navbar-expand-lg navbar-light" id="footer-botones">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -122,6 +166,8 @@
                 autor Sergio Vela Pelegrina (sergiovp96@gmail.com)</p>
         </section>
     </footer>
+    {% endblock %} <!--Footer-->
+{% endblock %} <!--Body-->
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
