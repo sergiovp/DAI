@@ -124,6 +124,17 @@ def svg():
 # Práctica 3:
 ############################
 
+# Diccionario global. Almacenará la URL y nombre con el que quiero que aparezca.
+paginas = {}
+
+def update_paginas(url, nombre):
+    if (len(paginas) >= 3):
+        if (not url in paginas):
+            del paginas[next(iter(paginas))]
+            paginas.update({url: nombre})
+    else:
+        paginas.update({url: nombre})
+
 def start_session(usuario, password):
     session['usuario'] = usuario
     session['password'] = password
@@ -139,12 +150,18 @@ def index():
     if 'password' in session:
         password = session['password']
     
-    return render_template('index.html', usuario = usuario )
+    #update_paginas('index', 'Inicio')
+    
+    return render_template('index.html', usuario = usuario,
+    paginas = paginas)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     usuario = None
+
+    #paginas.clear()
+    update_paginas('login', 'LogIn')
 
     if (request.method == 'POST'):
         usuario = request.form['usuario']
@@ -156,7 +173,8 @@ def login():
             # Si la contraseña del usuario coincide...
             if (model.check_password(usuario, password)):
                 start_session(usuario, password)
-                return render_template('index.html', usuario = usuario)
+                #paginas.clear()
+                return render_template('index.html', usuario = usuario, paginas = paginas)
             # No coincide la contrasela...
             else:
                 error = 'Contraseña incorrecta'
@@ -169,6 +187,8 @@ def login():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     error = None
+
+    update_paginas('registro', 'Regístrate')
 
     if (request.method == 'POST'):
         usuario = request.form['usuario']
@@ -192,6 +212,8 @@ def registro():
 @app.route('/ver_datos')
 def ver_datos():
     usuario = password = ''
+
+    update_paginas('ver_datos', 'Mis datos')
     
     if 'usuario' in session:
         usuario = session['usuario']
@@ -209,6 +231,8 @@ def modificar_datos():
     password = session['password']
     mensaje = 'Datos modificados correctamente'
     error = None
+
+    update_paginas('modificar_datos', 'Modificar datos')
 
     # Hago las modificaciones oportunas
     if (request.method == 'POST'):
@@ -244,6 +268,7 @@ def modificar_datos():
 @app.route('/logout')
 def logout():
     session.clear()
+    paginas.clear()
     return redirect(url_for('index'))
 
 @app.route('/interfaz_ejercicios/<ejercicio>')
