@@ -101,6 +101,22 @@
                     <a class="nav-link" href="{{ url_for('modificar_datos')}}">Modificar mis datos</a>
                 </li>
                 {% endif %}
+                {% if paginas %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                        id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Últimas páginas visitadas 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for key, value in paginas.items() %}
+                            <a class="dropdown-item" href="{{ key }}">{{ value }}</a>
+                                {% if not loop.last %}
+                                    <div class="dropdown-divider"></div>
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endif %}
             </ul>
             
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
