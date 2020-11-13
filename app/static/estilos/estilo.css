@@ -1,10 +1,22 @@
+body {
+    background-color: #e3f2fd;
+}
+
 .navbar.navbar-expand-lg.navbar-light {
     background-color: #e3f2fd;
+    border-bottom: solid;
+    border-width: thin;
+    margin-bottom: 1.1rem;
+    border-color: #cbe7fb;
 }
 
 /* Reglas para el Footer (Pie de página) */
 .pie_pagina {
     background-color: #e3f2fd;
+    border-top: solid;
+    border-width: thin;
+    margin-top: 1.1rem;
+    border-color: #cbe7fb;
 }
 
 .pie_contacto {
@@ -24,6 +36,7 @@
 
 #footer-botones {
     display: list-item;
+    border: none;
 }
 
 /* TEST MAIN CONTENT */
