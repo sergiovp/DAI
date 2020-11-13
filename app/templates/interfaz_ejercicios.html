@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{%block addlink %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilologin.css') }}">
+{% endblock %}
+
+{% block titulo %}Ejercicios{% endblock %}
+
+{% block contenido_formulario_ejercicios %}
+<form class="form-blok" method="POST">
+    <div class="form-group mr-5 ml-5">
+        <div class="col-xs-4">
+            <h3 class="titulo-ejercicio">Ejercicio seleccionado: {{ nombre }}</h3>
+            {% if ejercicio == 'burbuja' or ejercicio == 'seleccion' %}
+            <h5>Debes introducir números siguiendo el formato que verás 
+                a continuación y se ordenarán</h5>
+            <h5>Ejemplos:</h5>
+            <h6>4,3,10,-7,8,77,101,27,7,-26 -> [-26, -7, 3, 4, 7, 8, 10, 27, 77, 101]</h6>
+            <h6>27,7,0,-27,-100,26 -> [-100, -27, 0, 7, 26, 27]</h6>
+            {% elif ejercicio == 'criba' %}
+            <h5>Debes introducir un número natural y te devolverá los números primos menores que
+                dicho número.</h5>
+            <h5>Ejemplos:</h5>
+            <h6>27 -> [2, 3, 5, 7, 11, 13, 17, 19, 23]</h6>
+            <h6>40 -> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]</h6>
+            {% elif ejercicio == 'fibonacci' %}
+            <h5>Debes introducir un número entero y te devolverá el n-ésimo 
+            número de la sucesión de Fibonacci</h5>
+            <h5>Ejemplos:</h5>
+            <h6>27 -> 121393</h6>
+            <h6>4 -> 2</h6>
+            {% elif ejercicio == 'corchetes' %}
+            <h5>Debes introducir una cadena de corchetes y devolverá si dicha cadena está balanceada.</h5>
+            <h5>Ejemplos:</h5>
+            <h6>[] -> Correcto</h6>
+            <h6>[[][[]]] -> Correcto</h6>
+            <h6>[][] -> Correcto</h6>
+            <h6>][ -> Incorrecto</h6>
+            <h6>[[][[ -> Incorrecto</h6>
+            <h6>[]][[] -> Incorrecto</h6>
+            {% elif ejercicio == 'correo' %}
+            <h5>Debes introducir una cadena de caracteres y te devolverá si es un
+            correo válido o no.</h5>
+            <h5>Ejemplos:</h5>
+            <h6>sergiovp96@gmail.com -> Sí es válido</h6>
+            <h6>pepitomix@ -> No es válido</h6>
+            <h6>holagamil.com -> No es válido</h6>
+            {% elif ejercicio == 'tarjeta' %}
+            <h5>Debes introducir un número de tarjeta de crédito y te devolverá
+            si es válido o no.</h5>
+            <h5>Ejemplos:</h5>
+            <h6>1234-1234-1234-1234 -> Válido</h6>
+            <h6>1234 1234 1234 1234 -> Válido</h6>
+            <h6>El resto de formatos será INVÁLIDO</h6>
+            {% elif ejercicio == 'palabra' %}
+            <h5>Debes introducir una palabra con un formato determinado y te devolverá si es
+                válida o no. Para que sea válida deberás introducir una palabra
+                seguida de un espacio y una letra mayúscula.</h5>
+            <h5>Ejemplos:</h5>
+            <h6>Vela S -> Válida</h6>
+            <h6>Sergio V -> Válida</h6>
+            <h6>hola H -> Válida</h6>
+            <h6>efhwejkf e -> No válida</h6>
+            <h6>ehjwf ljwehf -> No válida</h6>
+            {% elif ejercicio == 'svg' %}
+            <h5>Debes refrescar la página para que se generen las figuras</h5>
+            {% endif %}
+            <label class="sr-only" for="inputEmail">Email</label>
+            <input class="form-control" name="param-ejercicio" id="inputEmail"
+                placeholder="Introducir números...">
+            {% if mensaje %}
+            <input class="form-control" name="param-ejercicio" id="inputEmail"
+                placeholder="{{ mensaje }}" value="{{ mensaje }}" disabled>
+            {% endif %}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-success">Aceptar</button>
+</form>
+{% endblock %}
