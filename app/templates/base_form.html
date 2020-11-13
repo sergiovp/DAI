@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilologin.css') }}">
 {% endblock %}
 
-{% block body %}
+{% block nav %}{% endblock %}
+
+{% block contenido_formulario_login %}
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <!-- Tabs Titles -->
@@ -45,3 +47,5 @@
     </div>
 </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
