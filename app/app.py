@@ -62,15 +62,15 @@ def selection_sort(numeros):
 
     return "El vector ordenado mediante selección: " + ''.join(str(lista))
 
-@app.route('/criba', methods=['GET'])
+@app.route('/criba/<numero>')
 def criba(numero):
     primos = []
-    primos = ejercicios.criba_eratostenes(numero)
+    primos = ejercicios.criba_eratostenes(int(numero))
     return "Los números primos hasta " + str(numero) + " son: " + ''.join(str(primos))
 
-@app.route('/fibonacci/<int:numero>')
+@app.route('/fibonacci/<numero>')
 def fibonacci(numero):
-    num_fibo = ejercicios.sucesion_fibonacci(numero)
+    num_fibo = ejercicios.sucesion_fibonacci(int(numero))
 
     return "El número " + str(numero) + " ésimo de la sucesión de Fibonacci es: " + ''.join(str(num_fibo))
 
@@ -271,9 +271,34 @@ def logout():
     paginas.clear()
     return redirect(url_for('index'))
 
-@app.route('/interfaz_ejercicios/<ejercicio>')
-def interfaz_ejercicios(ejercicio):
-    return render_template('interfaz_ejercicios.html', ejercicio=ejercicio)
+@app.route('/interfaz_ejercicios/<nombre>/<ejercicio>', methods=['GET', 'POST'])
+def interfaz_ejercicios(nombre, ejercicio):
+    parametros = None
+    mensaje = ''
+    if (request.method == 'POST'):
+        parametros = request.form['param-ejercicio']
+        if (parametros):
+            if (ejercicio == 'burbuja'):
+                mensaje = bubble_sort(parametros)
+            elif (ejercicio == 'seleccion'):
+                mensaje = selection_sort(parametros)
+            elif (ejercicio == 'criba'):
+                mensaje = criba(parametros)
+            elif (ejercicio == 'fibonacci'):
+                mensaje = fibonacci(parametros)
+            elif (ejercicio == 'corchetes'):
+                mensaje = corchetes_balanceados(parametros)
+            elif (ejercicio == 'correo'):
+                mensaje = validar_correo(parametros)
+            elif (ejercicio == 'tarjeta'):
+                mensaje = validar_tarjeta(parametros)
+            elif (ejercicio == 'palabra'):
+                mensaje = validar_palabra(parametros)
+            elif (ejercicio == 'svg'):
+                mensaje = svg(parametros)
+            
+        return render_template('interfaz_ejercicios.html', nombre=nombre, ejercicio = ejercicio, mensaje = mensaje)    
+    return render_template('interfaz_ejercicios.html', nombre=nombre, ejercicio=ejercicio, mensaje=mensaje)
 
 
 @app.errorhandler(404)
