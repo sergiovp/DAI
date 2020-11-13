@@ -27,13 +27,13 @@
         </ul>
     {% endif %}
 {% endwith %}
-{% block body %}
+{% block nav %}
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url_for('index')}}">
             <img src="{{ url_for('static', filename='images/usuario.png') }}"
             width="30" height="30" alt="Imagen con el logo">
         </a>
-        <a class="navbar-brand" href="#">UsuarioApp</a>
+        <a class="navbar-brand" href="{{ url_for('index')}}">UsuarioApp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +42,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('index')}}">Inicio<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link1</a>
@@ -57,39 +57,40 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='burbuja')}}">Ordena burbuja
+                            href="{{ url_for('interfaz_ejercicios', nombre='Ordenación burbuja', ejercicio='burbuja')}}">Ordena burbuja
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <!--AQUÍIIIIII-->
+                        <a class="dropdown-item"
+                            href="{{ url_for('interfaz_ejercicios', nombre='Ordenación selección', ejercicio='seleccion')}}">Ordena selección
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='seleccion')}}">Ordena selección
+                            href="{{ url_for('interfaz_ejercicios', nombre='Criba de Eratóstenes', ejercicio='criba')}}">Criba
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='criba')}}">Criba
+                            href="{{ url_for('interfaz_ejercicios', nombre='Sucesión de Fibonacci', ejercicio='fibonacci')}}">Fibonacci
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='fibonacci')}}">Fibonacci
+                            href="{{ url_for('interfaz_ejercicios', nombre='Comprobar secuencia de corchetes balanceada', ejercicio='corchetes')}}">Corchetes
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='corchetes')}}">Corchetes
+                            href="{{ url_for('interfaz_ejercicios', nombre='Identificar correo correcto', ejercicio='correo')}}">Validar correo
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='correo')}}">Validar correo
+                            href="{{ url_for('interfaz_ejercicios', nombre='Identificar tarjeta de crédito correcta', ejercicio='tarjeta')}}">Validar tarjeta
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='tarjeta')}}">Validar tarjeta
+                            href="{{ url_for('interfaz_ejercicios', nombre='Identificar palabra correcta', ejercicio='palabra')}}">Validar palabra
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='palabra')}}">Validar palabra
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"
-                            href="{{ url_for('interfaz_ejercicios', ejercicio='svg')}}">Figuras SVG
+                            href="{{ url_for('interfaz_ejercicios', nombre='Dibujar figuras aleatorias SVG', ejercicio='svg')}}">Figuras SVG
                         </a>
                     </div>
                 </li>
@@ -138,23 +139,10 @@
             </div>
         </div>
     </nav>
-
-   <div class="container">
-       <div class="row">
-           <div class="col-md-8 col-sm-12 hola">
-                <p>Contenido</p>
-                <p>Contenido</p>
-                <p>Contenido</p>
-                <p>Contenido</p>
-           </div>
-           <div class="col-md-4 col-sm-12 hola">
-                <p>Menú lateral</p>
-                <p>Menú lateral</p>
-                <p>Menú lateral</p>
-                <p>Menú lateral</p>
-           </div>
-       </div>
-   </div>
+{% endblock %} <!--Nav-->
+{% block contenido_principal_inicio %}{% endblock %}
+{% block contenido_formulario_ejercicios %}{% endblock %}
+{% block contenido_formulario_login %}{% endblock %}
 
    <!--Footer. Será el mismo para todas las páginas (heredado) salvo registro y login-->
    {% block footer %}
@@ -185,7 +173,7 @@
         </section>
     </footer>
     {% endblock %} <!--Footer-->
-{% endblock %} <!--Body-->
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
