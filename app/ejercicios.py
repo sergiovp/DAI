@@ -32,6 +32,8 @@ def clean_list(string):
 
 # Saca los números primos menores que un número dado
 def criba_eratostenes(numero):
+    if (numero == 0 or numero == 1):
+        return []
     primos = []
     es_primo = [1 for i in range(numero)]
     es_primo[0] = es_primo[1] = 0
@@ -111,19 +113,19 @@ def crear_figura():
     # Propiedades círculo
     color_c = random.choice(colores)
     borde_c = random.choice(colores)
-    cx = random.randrange(50, 1315)
-    cy = random.randrange(50, 655)
+    cx = random.randrange(50, 1000)
+    cy = random.randrange(50, 380)
     r = random.randrange(30, 200)
 
     # Propiedades rectángulo
     color_r = random.choice(colores)
     borde_r = random.choice(colores)
-    rx = random.randrange(0, 1200)
-    ry = random.randrange(50, 655)
-    width = random.randrange(50, 400)
+    rx = random.randrange(0, 1000)
+    ry = random.randrange(50, 380)
+    width = random.randrange(50, 300)
     height = random.randrange(50, 300)
 
-    svg_start = '<svg width="1315" height="655">'
+    svg_start = '<svg width="1200" height="390">'
     svg_circle = '<circle cx="'+str(cx)+'" cy="'+str(cy)+'" r="'+str(r)+'" stroke="'+borde_r+'" stroke-width="1" fill="'+color_r+'" />'
     svg_end = '</svg>'
     
