@@ -119,6 +119,7 @@ def validar_palabra(palabra):
 def svg():
     figura = ejercicios.crear_figura()
     return figura
+    #return '<h1>Hola</h1>'
 
 ############################
 # Práctica 3:
@@ -139,28 +140,29 @@ def start_session(usuario, password):
     session['usuario'] = usuario
     session['password'] = password
 
+def get_user_session():
+    if ('usuario' in session):
+        return session['usuario']
+    else: return
+
+def get_pass_session():
+    if ('password' in session):
+        return session['password']
+    else: return
+
 @app.route('/')
 @app.route('/index')
 def index():
-    usuario = password = ''
+    # Comprobamos si se ha iniciado la sesión
+    usuario = get_user_session()
+    password = get_pass_session()
     
-    if 'usuario' in session:
-        usuario = session['usuario']
-
-    if 'password' in session:
-        password = session['password']
-    
-    #update_paginas('index', 'Inicio')
-    
-    return render_template('index.html', usuario = usuario,
-    paginas = paginas)
+    return render_template('index.html', usuario = usuario, paginas = paginas)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    usuario = None
+    usuario = error = None
 
-    #paginas.clear()
     update_paginas('login', 'LogIn')
 
     if (request.method == 'POST'):
@@ -172,8 +174,9 @@ def login():
 
             # Si la contraseña del usuario coincide...
             if (model.check_password(usuario, password)):
+                # EN ESTE PUNTO COMENZAMOS LA SESIÓN
                 start_session(usuario, password)
-                #paginas.clear()
+
                 return render_template('index.html', usuario = usuario, paginas = paginas)
             # No coincide la contrasela...
             else:
@@ -211,58 +214,57 @@ def registro():
 
 @app.route('/ver_datos')
 def ver_datos():
-    usuario = password = ''
+    # Lo comprobamos por si alguien intenta acceder a la URL sin estar logeado
+    usuario = get_user_session()
+    password = get_pass_session()
 
     update_paginas('ver_datos', 'Mis datos')
-    
-    if 'usuario' in session:
-        usuario = session['usuario']
 
-    if 'password' in session:
-        password = session['password']
+    return render_template('ver_datos.html', 
+        usuario = usuario, password = password)
 
-    return render_template('ver_datos.html', usuario = usuario, password = password)
-
-# A este método le debe de llegar el POST y cambiar los datos.
 @app.route('/modificar_datos', methods=['GET', 'POST'])
 def modificar_datos():
-    #data_base = model.start_db()
-    usuario = session['usuario']
-    password = session['password']
+    # Lo comprobamos por si alguien intenta acceder a la URL sin estar logeado
+    usuario = get_user_session()
+    password = get_pass_session()
+
     mensaje = 'Datos modificados correctamente'
     error = None
 
     update_paginas('modificar_datos', 'Modificar datos')
 
-    # Hago las modificaciones oportunas
+    # Si introducimos datos en el formulario
     if (request.method == 'POST'):
 
-        if (request.form['usuario'] != session['usuario']):
+        # Si han modificado el nombre de usuario
+        if ((request.form['usuario'] != usuario) and request.form['usuario']):
             usuario = request.form['usuario']
 
+            # Si el nombre nuevo ya está cogido por otro
             if (model.check_key_exists(usuario)):
                 error = 'Nombre de usuario en uso, elige otro.'
-                return render_template('modificar_datos.html', 
-                usuario = session['usuario'], password = session['password'], error = error)
+                
+                return render_template('modificar_datos.html', usuario = usuario, 
+                    password = password, error = error)
 
-        if (request.form['password'] != session['password']):
+        # Si han modificado la contraseña
+        if ((request.form['password'] != password) and request.form['password']):
             password = request.form['password']
 
+        # Borramos de la BD el usuario con nombre antiguo
         model.delete_user(session['usuario'])
 
+        # Actualizamos de la BD el usuario y pass
         model.update_user_pass(usuario, password)
+
+        # Eliminamos y volvemos a establecer la sesión con los datos actualizados
         session.clear()
         start_session(usuario, password)
         
         return render_template('modificar_datos.html',
-        usuario = usuario, password = password, mensaje = mensaje)
-    
-    # Muestro los datos actuales
-    else:
-        render_template('modificar_datos.html', usuario = usuario, password = password)
+            usuario = usuario, password = password, mensaje = mensaje)
 
-        #if (usuario):
-        #    data_base[session['usuario']] = usuario
     return render_template('modificar_datos.html', usuario = usuario, password = password)
 
 @app.route('/logout')
@@ -273,8 +275,18 @@ def logout():
 
 @app.route('/interfaz_ejercicios/<nombre>/<ejercicio>', methods=['GET', 'POST'])
 def interfaz_ejercicios(nombre, ejercicio):
-    parametros = None
-    mensaje = ''
+    parametros = mensaje = ''
+    usuario = get_user_session()
+
+    '''
+        Como parámetro recibimos el nombre que queremos que aparezca en el menú (nombre)
+        y el nombre de la función para el enlace (ejercicio)
+
+        parametros será la variable por si introducimos datos en el formulario de los ejercicios
+
+        mensaje será lo que devolveremos como resultado de los ejercicios
+    '''
+
     if (request.method == 'POST'):
         parametros = request.form['param-ejercicio']
         if (parametros):
@@ -294,11 +306,17 @@ def interfaz_ejercicios(nombre, ejercicio):
                 mensaje = validar_tarjeta(parametros)
             elif (ejercicio == 'palabra'):
                 mensaje = validar_palabra(parametros)
-            elif (ejercicio == 'svg'):
-                mensaje = svg(parametros)
-            
-        return render_template('interfaz_ejercicios.html', nombre=nombre, ejercicio = ejercicio, mensaje = mensaje)    
-    return render_template('interfaz_ejercicios.html', nombre=nombre, ejercicio=ejercicio, mensaje=mensaje)
+        
+    # El ejercicio de dibujar la figura SVG es el único que no necesita parámetros
+    # y por tanto, no necesitaremos introducir nada en el formulario
+    elif (ejercicio == 'svg'):
+        mensaje = svg()
+    
+    update_paginas('/interfaz_ejercicios/' + nombre + '/' + ejercicio, nombre)
+
+    return render_template('interfaz_ejercicios.html', 
+        nombre = nombre, ejercicio = ejercicio, mensaje = mensaje, 
+            paginas = paginas, usuario = usuario)
 
 
 @app.errorhandler(404)
