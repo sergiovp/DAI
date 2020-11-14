@@ -65,15 +65,21 @@
             {% elif ejercicio == 'svg' %}
             <h5>Debes refrescar la página para que se generen las figuras</h5>
             {% endif %}
-            <label class="sr-only" for="inputEmail">Email</label>
-            <input class="form-control" name="param-ejercicio" id="inputEmail"
-                placeholder="Introducir números...">
-            {% if mensaje %}
-            <input class="form-control" name="param-ejercicio" id="inputEmail"
-                placeholder="{{ mensaje }}" value="{{ mensaje }}" disabled>
-            {% endif %}
+            {% if ejercicio == 'svg' %}
+                {{ mensaje|safe }}
         </div>
     </div>
-    <button type="submit" class="btn btn-outline-success">Aceptar</button>
+            {% else %}
+            <label class="sr-only" for="inputEmail">Email</label>
+            <input class="form-control" name="param-ejercicio" id="inputEmail"
+                placeholder="Introducir parámetros...">
+                {% if mensaje %}
+                    <input class="form-control" name="param-ejercicio" id="inputEmail"
+                        placeholder="{{ mensaje }}" value="{{ mensaje }}" disabled>
+                {% endif %}
+        </div>
+    </div>
+                    <button type="submit" class="btn btn-outline-success">Aceptar</button>
+            {% endif %}
 </form>
 {% endblock %}
