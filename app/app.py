@@ -10,9 +10,12 @@ from flask import Flask, flash, redirect, render_template, \
     request, url_for, session
 import ejercicios
 import model
+from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+client = MongoClient("mongo", 27017)
+db = client.SampleCollections
 
 ############################
 # Práctica 1 y 2:
@@ -311,8 +314,15 @@ def interfaz_ejercicios(nombre, ejercicio):
     # y por tanto, no necesitaremos introducir nada en el formulario
     elif (ejercicio == 'svg'):
         mensaje = svg()
-    
-    update_paginas('/interfaz_ejercicios/' + nombre + '/' + ejercicio, nombre)
+
+    if (ejercicio == 'burbuja' or ejercicio == 'seleccion' or
+        ejercicio == 'criba' or ejercicio == 'fibonacci' or
+        ejercicio == 'corchetes' or ejercicio == 'correo' or
+        ejercicio == 'tarjeta' or ejercicio == 'palabra' or ejercicio == 'palabra'):
+
+        update_paginas('/interfaz_ejercicios/' + nombre + '/' + ejercicio, nombre)
+    else:
+        return redirect(url_for(ejercicio))
 
     return render_template('interfaz_ejercicios.html', 
         nombre = nombre, ejercicio = ejercicio, mensaje = mensaje, 
@@ -322,3 +332,23 @@ def interfaz_ejercicios(nombre, ejercicio):
 @app.errorhandler(404)
 def page_not_found(error):
     return "<h1 style=\"color:red; text-align:center\";>Página no encontrada</h1>", 404
+
+############################
+# Práctica 4:
+############################
+
+@app.route('/pokedex')
+def pokedex():
+    update_paginas('pokedex', 'Pokédex')
+    usuario = get_user_session()
+	# Encontramos los documentos de la coleccion "samples_friends"
+    episodios = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
+
+    lista_episodios = []
+    for episodio in episodios:
+	    app.logger.debug(episodio) # salida consola
+	    lista_episodios.append(episodio)
+
+	# a los templates de Jinja hay que pasarle una lista, no el cursor
+    return render_template('pokemon.html', episodios = lista_episodios,
+        paginas = paginas, usuario = usuario)
