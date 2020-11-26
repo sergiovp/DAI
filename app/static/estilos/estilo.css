@@ -62,3 +62,44 @@ body {
     color: blue;
     font-size: 1.2rem;
 }
+
+/* Página Pokémon */
+.pokemon-pares {
+    text-align: center;
+}
+
+.pokemon-impares {
+    background-color: #cbe7fb;
+    text-align: center;
+}
+
+.título-pokedex {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.buscador-nombre {
+    text-align: center;
+}
+
+.id-nombre {
+    text-decoration: underline;
+    font-size: 1.1rem;
+}
+
+.formulario-busqueda-nombre {
+    margin-bottom: 2rem;
+}
+
+#aceptar-nombre {
+    margin-top: 1.2rem;
+}
+
+.buscador-tipo {
+    text-align: center;
+}
+
+#aceptar-tipo {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
