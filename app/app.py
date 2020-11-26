@@ -10,10 +10,13 @@ from flask import Flask, flash, redirect, render_template, \
     request, url_for, session
 import ejercicios
 import model
+import pymongo
 from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+# Start MongoDB and load our DB
 client = MongoClient("mongo", 27017)
 db = client.SampleCollections
 
@@ -341,14 +344,14 @@ def page_not_found(error):
 def pokedex():
     update_paginas('pokedex', 'Pokédex')
     usuario = get_user_session()
-	# Encontramos los documentos de la coleccion "samples_friends"
-    episodios = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
+	# Encontramos los documentos de la coleccion "samples_pokemon"
+    coleccion_pokemon = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
 
-    lista_episodios = []
-    for episodio in episodios:
-	    app.logger.debug(episodio) # salida consola
-	    lista_episodios.append(episodio)
+    todos_pokemon = []
+    for pokemon in coleccion_pokemon:
+	    app.logger.debug(pokemon) # salida consola
+	    todos_pokemon.append(pokemon)
 
 	# a los templates de Jinja hay que pasarle una lista, no el cursor
-    return render_template('pokemon.html', episodios = lista_episodios,
+    return render_template('pokemon.html', todos_pokemon = todos_pokemon,
         paginas = paginas, usuario = usuario)
