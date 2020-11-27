@@ -340,18 +340,27 @@ def page_not_found(error):
 # Práctica 4:
 ############################
 
-@app.route('/pokedex')
+@app.route('/pokedex', methods=['GET', 'POST'])
 def pokedex():
     update_paginas('pokedex', 'Pokédex')
     usuario = get_user_session()
-	# Encontramos los documentos de la coleccion "samples_pokemon"
-    coleccion_pokemon = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
+    parametros = ''
+    todos_pokemon = ''
+
+    if (request.method == 'POST'):
+        parametros = request.form['pokemon-introducido']
+        expresion = parametros + '.*'
+        query = { "name": {"$regex": expresion}}
+        coleccion_pokemon = db.samples_pokemon.find(query)
+    else:
+        # Encontramos los documentos de la coleccion "samples_pokemon"
+        coleccion_pokemon = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
 
     todos_pokemon = []
     for pokemon in coleccion_pokemon:
-	    app.logger.debug(pokemon) # salida consola
-	    todos_pokemon.append(pokemon)
+        app.logger.debug(pokemon) # salida consola
+        todos_pokemon.append(pokemon)
 
 	# a los templates de Jinja hay que pasarle una lista, no el cursor
     return render_template('pokemon.html', todos_pokemon = todos_pokemon,
-        paginas = paginas, usuario = usuario)
+        paginas = paginas, usuario = usuario, parametros = parametros)
