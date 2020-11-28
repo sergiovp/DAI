@@ -345,7 +345,6 @@ def pokedex():
     update_paginas('pokedex', 'Pokédex')
     usuario = get_user_session()
     parametros = ''
-    todos_pokemon = ''
 
     if (request.method == 'POST'):
         parametros = request.form['pokemon-introducido']
