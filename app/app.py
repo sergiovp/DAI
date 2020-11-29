@@ -10,15 +10,9 @@ from flask import Flask, flash, redirect, render_template, \
     request, url_for, session
 import ejercicios
 import model
-import pymongo
-from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
-# Start MongoDB and load our DB
-client = MongoClient("mongo", 27017)
-db = client.SampleCollections
 
 ############################
 # Práctica 1 y 2:
@@ -350,10 +344,10 @@ def pokedex():
         parametros = request.form['pokemon-introducido']
         expresion = parametros + '.*'
         query = { "name": {"$regex": expresion}}
-        coleccion_pokemon = db.samples_pokemon.find(query)
+        coleccion_pokemon = model.get_pokemon(query)
     else:
         # Encontramos los documentos de la coleccion "samples_pokemon"
-        coleccion_pokemon = db.samples_pokemon.find() # devuelve un cursor(*), no una lista ni un iterador
+        coleccion_pokemon = model.get_coleccion_pokemon() # devuelve un cursor(*), no una lista ni un iterador
 
     todos_pokemon = []
     for pokemon in coleccion_pokemon:
@@ -366,7 +360,7 @@ def pokedex():
 
 @app.route('/eliminar_pokemon/<nombre>/')
 def eliminar_pokemon(nombre):
-    db.samples_pokemon.delete_one({"name": nombre})
+    model.eliminar_pokemon(nombre)
 
     return redirect(url_for('pokedex'))
 
@@ -380,7 +374,7 @@ def modificar_pokemon(nombre):
             query = { "name": nombre }
             valor_nuevo = { "$set": { "name": nuevo_nombre }}
 
-            db.samples_pokemon.update_one(query, valor_nuevo)
+            model.modificar_pokemon(query, valor_nuevo)
 
             return redirect(url_for('pokedex'))
             # No se ha introducido un nombre
@@ -402,7 +396,7 @@ def aniadir_pokemon():
 
         if (numero and nombre and img):
             nuevo_pokemon = {"num": numero, "name": nombre, "img": img}
-            db.samples_pokemon.insert_one(nuevo_pokemon)
+            model.aniadir_pokemon(nuevo_pokemon)
 
             return redirect(url_for('pokedex'))
         else:
