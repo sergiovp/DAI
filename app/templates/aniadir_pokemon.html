@@ -1,0 +1,20 @@
+{% extends "base_form.html" %}
+{% block titulo %}Modificar Pokémon{% endblock %}
+
+{% block formulario %}
+    <form method="POST">
+        <input type="text" id="login" class="fadeIn second"
+            name="numero" placeholder="Número Pokémon" value="">
+        <input type="text" id="login" class="fadeIn second"
+            name="nombre" placeholder="Nombre Pokémon">
+        <input type="text" id="login" class="fadeIn second"
+            name="img" placeholder="URL imagen Pokémon">
+        <input type="submit" class="fadeIn fourth" value="Añadir">
+    </form>
+{% endblock %}
+
+{% block volver_atras %}
+<div id="formFooter">
+    <a class="underlineHover" href="{{ url_for('pokedex') }}">Cancelar</a>
+</div>
+{% endblock %}
