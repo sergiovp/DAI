@@ -391,3 +391,22 @@ def modificar_pokemon(nombre):
 
     
     return render_template('modificar_pokemon.html', nombre = nombre)
+
+@app.route('/aniadir_pokemon', methods=['GET', 'POST'])
+def aniadir_pokemon():
+    
+    if (request.method == 'POST'):
+        numero = request.form['numero']
+        nombre = request.form['nombre']
+        img = request.form['img']
+
+        if (numero and nombre and img):
+            nuevo_pokemon = {"num": numero, "name": nombre, "img": img}
+            db.samples_pokemon.insert_one(nuevo_pokemon)
+
+            return redirect(url_for('pokedex'))
+        else:
+            mensaje = 'No has introducido todos los parámetros'
+            return render_template('aniadir_pokemon.html', mensaje = mensaje)
+    
+    return render_template('aniadir_pokemon.html')
