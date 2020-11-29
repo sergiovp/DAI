@@ -363,3 +363,31 @@ def pokedex():
 	# a los templates de Jinja hay que pasarle una lista, no el cursor
     return render_template('pokemon.html', todos_pokemon = todos_pokemon,
         paginas = paginas, usuario = usuario, parametros = parametros)
+
+@app.route('/eliminar_pokemon/<nombre>/')
+def eliminar_pokemon(nombre):
+    db.samples_pokemon.delete_one({"name": nombre})
+
+    return redirect(url_for('pokedex'))
+
+@app.route('/modificar_pokemon/<nombre>/', methods=['GET', 'POST'])
+def modificar_pokemon(nombre):
+    mensaje = ''
+
+    if (request.method == 'POST'):
+        nuevo_nombre = request.form['nuevo-nombre']
+        if (nuevo_nombre):
+            query = { "name": nombre }
+            valor_nuevo = { "$set": { "name": nuevo_nombre }}
+
+            db.samples_pokemon.update_one(query, valor_nuevo)
+
+            return redirect(url_for('pokedex'))
+            # No se ha introducido un nombre
+        else:
+            mensaje = 'No has introducido un nuevo nombre'
+            return render_template('modificar_pokemon.html', 
+                nombre = nombre, mensaje = mensaje)
+
+    
+    return render_template('modificar_pokemon.html', nombre = nombre)
