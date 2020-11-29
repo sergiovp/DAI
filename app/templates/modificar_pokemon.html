@@ -1,0 +1,18 @@
+{% extends "base_form.html" %}
+{% block titulo %}Modificar Pokémon{% endblock %}
+
+{% block formulario %}
+    <form method="POST">
+        <input type="text" id="login" class="fadeIn second"
+            name="usuario" value="{{nombre}}" disabled>
+        <input type="text" id="login" class="fadeIn second"
+            name="nuevo-nombre" placeholder="Nuevo nombre">
+        <input type="submit" class="fadeIn fourth" value="Modificar">
+    </form>
+{% endblock %}
+
+{% block volver_atras %}
+<div id="formFooter">
+    <a class="underlineHover" href="{{ url_for('pokedex') }}">Cancelar</a>
+</div>
+{% endblock %}
