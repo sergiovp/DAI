@@ -7,7 +7,8 @@ Ingeniería Informática UGR (2020/21).
 '''
 
 from flask import Flask, flash, redirect, render_template, \
-    request, url_for, session
+    request, url_for, session, jsonify
+from bson import ObjectId
 import ejercicios
 import model
 
@@ -404,3 +405,8 @@ def aniadir_pokemon():
             return render_template('aniadir_pokemon.html', mensaje = mensaje)
     
     return render_template('aniadir_pokemon.html')
+
+############################
+# Práctica 5:
+############################
+
