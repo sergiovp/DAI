@@ -410,3 +410,65 @@ def aniadir_pokemon():
 # Práctica 5:
 ############################
 
+@app.route('/api/todos_pokemon', methods=['GET', 'POST'])
+def api_get_todos_pokemon():
+    if (request.method == 'GET'):
+        lista_pokemon = []
+        coleccion_pokemon = model.get_coleccion_pokemon()
+
+        for pokemon in coleccion_pokemon:
+            lista_pokemon.append ({
+                'id':    str(pokemon.get('_id')),
+                'numero': pokemon.get('num'), 
+                'nombre':  pokemon.get('name')
+            })
+
+    return jsonify(lista_pokemon)
+
+@app.route('/api/filtro_pokemon', methods=['GET', 'POST'])
+def api_get_filtro_pokemon():
+    parametros = ''
+    if (request.method == 'GET'):
+        lista_pokemon = []
+
+        # Hay parámetros en la petición
+        if (request.args):
+
+            # Está el parámetro 'name'
+            if (request.args.get('name')):
+
+                # Nos quedamos con el nombre introducido para la expresión regular
+                parametros = request.args['name']
+                expresion = parametros + '.*'
+                query = { "name": {"$regex": expresion}}
+                coleccion_pokemon = model.get_pokemon(query)
+
+                for pokemon in coleccion_pokemon:
+                    lista_pokemon.append ({
+                        'id':    str(pokemon.get('_id')),
+                        'numero': pokemon.get('num'), 
+                        'nombre':  pokemon.get('name')
+                    })
+
+                if (lista_pokemon):
+                    return jsonify(lista_pokemon)
+                else:
+                    return jsonify(({
+                        'error': 404,
+                        'error_mensaje': 'No se ha encontrado ningun Pokemon con ese nombre',
+                        'info': 'El nombre introducido ni se encuentra ni se asemeja a ningun pokemon'
+                    }))
+            else:
+                return jsonify(({
+                    'error': 400,
+                    'error_mensaje': 'No se ha introducido el parametro correcto en la peticion',
+                    'info': 'Debe introducir el parametro \'name\' seguido de un nombre en la peticion'
+                }))
+
+        # No Hay parámetros en la petición
+        else:
+            return jsonify(({
+                'error': 400,
+                'error_mensaje': 'No se han introducido parametros en la peticion',
+                'info': 'Pruebe con http://localhost:5000/api/filtro_pokemon?name=NOMBRE'
+            }))
