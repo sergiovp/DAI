@@ -410,8 +410,8 @@ def aniadir_pokemon():
 # Práctica 5:
 ############################
 
-@app.route('/api/todos_pokemon', methods=['GET', 'POST'])
-def api_get_todos_pokemon():
+@app.route('/api/pokemon', methods=['GET', 'POST'])
+def api_get_pokemon():
     if (request.method == 'GET'):
         lista_pokemon = []
         coleccion_pokemon = model.get_coleccion_pokemon()
@@ -423,7 +423,7 @@ def api_get_todos_pokemon():
                 'nombre':  pokemon.get('name')
             })
 
-    return jsonify(lista_pokemon)
+        return jsonify(lista_pokemon)
 
 @app.route('/api/filtro_pokemon', methods=['GET', 'POST'])
 def api_get_filtro_pokemon():
