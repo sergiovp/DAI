@@ -552,13 +552,13 @@ def api_get_filtro_pokemon(_id):
         except:
             return jsonify(({
                 'error': 404,
-                'error_mensaje': 'No se ha encontrado ningun Pokemon',
-                'info': 'El ID introducido no conincide con el de ningun Pokemon'
+                'error_mensaje': 'No se ha encontrado ningún Pokémon',
+                'info': 'El ID introducido no conincide con el de ningún Pokémon'
             })), 404
 
     else:
         return jsonify(({
             'error': 400,
-            'error_mensaje': 'Peticion incorrecta',
+            'error_mensaje': 'Petición incorrecta',
             'info': 'La URL solo admite peticiones DELETE'
         })), 400
