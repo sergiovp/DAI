@@ -50,3 +50,6 @@ def modificar_pokemon(query, valor_nuevo):
 
 def aniadir_pokemon(nuevo_pokemon):
     db.samples_pokemon.insert_one(nuevo_pokemon)
+
+def eliminar_pokemon_id(query):
+    db.samples_pokemon.delete_one(query)
