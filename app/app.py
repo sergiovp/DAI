@@ -527,3 +527,37 @@ def api_filtro_pokemon():
                 'error_mensaje': 'No se han introducido parametros en la peticion',
                 'info': 'Pruebe con http://localhost:5000/api/filtro_pokemon?name=NOMBRE'
             }))
+
+@app.route('/api/del_pokemon/<_id>', methods = ['GET', 'POST', 'PUT','DELETE'])
+def api_get_filtro_pokemon(_id):
+    pokemon = ''
+
+    if (request.method == 'DELETE'):
+        try:
+            query = {"_id": ObjectId(_id) }
+            busqueda_pokemon = model.get_pokemon(query)
+
+            pokemon = ({
+                'id':    str(busqueda_pokemon[0].get('_id')),
+                'img': busqueda_pokemon[0].get('img'),
+                'numero': busqueda_pokemon[0].get('num'), 
+                'nombre':  busqueda_pokemon[0].get('name')
+            })
+
+            if (pokemon):
+                model.eliminar_pokemon_id(query)
+                return jsonify(pokemon)
+        
+        except:
+            return jsonify(({
+                'error': 404,
+                'error_mensaje': 'No se ha encontrado ningun Pokemon',
+                'info': 'El ID introducido no conincide con el de ningun Pokemon'
+            })), 404
+
+    else:
+        return jsonify(({
+            'error': 400,
+            'error_mensaje': 'Peticion incorrecta',
+            'info': 'La URL solo admite peticiones DELETE'
+        })), 404
