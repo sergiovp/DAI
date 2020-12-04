@@ -14,7 +14,7 @@ import model
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
+app.config['JSON_AS_ASCII'] = False
 ############################
 # Práctica 1 y 2:
 ############################
@@ -528,6 +528,7 @@ def api_filtro_pokemon():
                 'info': 'Pruebe con http://localhost:5000/api/filtro_pokemon?name=NOMBRE'
             }))
 
+# Función creada para eliminar un Pokémon mediante el verbo PUT
 @app.route('/api/del_pokemon/<_id>', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_get_filtro_pokemon(_id):
     pokemon = ''
