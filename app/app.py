@@ -410,7 +410,7 @@ def aniadir_pokemon():
 # Práctica 5:
 ############################
 
-@app.route('/api/pokemon', methods=['GET', 'POST'])
+@app.route('/api/pokemon', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_pokemon():
 
     # Si es GET, mostramos todos los Pokémon de la BD
@@ -478,7 +478,7 @@ def api_pokemon():
                 'info': 'Para una peticion POST has de introducir parametros'
             }))
 
-@app.route('/api/filtro_pokemon', methods=['GET', 'POST'])
+@app.route('/api/filtro_pokemon', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_filtro_pokemon():
     parametros = ''
     
@@ -560,4 +560,4 @@ def api_get_filtro_pokemon(_id):
             'error': 400,
             'error_mensaje': 'Peticion incorrecta',
             'info': 'La URL solo admite peticiones DELETE'
-        })), 404
+        })), 400
