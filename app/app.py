@@ -410,26 +410,53 @@ def aniadir_pokemon():
 # Práctica 5:
 ############################
 
+error_no_parametros = ({
+    'error': 400,
+    'error_mensaje': 'No se han introducido parámetros',
+    'info': 'Se deben introducir los parámetros correctos'
+})
+
+error_parametros_incorrectos = ({
+    'error': 400,
+    'error_mensaje': 'No se han introducido los parámetros correctos',
+    'info': 'Los parámetros a introducir son \'número\', \'nombre\' y \'url_imagen\''
+})
+
+error_verbo_peticion = ({
+    'error': 400,
+    'error_mensaje': 'Petición incorrecta',
+    'info': 'Revise el verbo utilizado y vuelva a probar'
+})
+
+error_BD = ({
+    'error': 404,
+    'error_mensaje': 'No se han encontrado el documento en la BD',
+    'info': 'Revise el estado de la BD o los filtros introducidos para la búsqueda'
+})
+
 @app.route('/api/pokemon', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_pokemon():
 
     # Si es GET, mostramos todos los Pokémon de la BD
     if (request.method == 'GET'):
-        lista_pokemon = []
-        coleccion_pokemon = model.get_coleccion_pokemon()
+        try:
+            lista_pokemon = []
+            coleccion_pokemon = model.get_coleccion_pokemon()
 
-        for pokemon in coleccion_pokemon:
-            lista_pokemon.append ({
-                'id':    str(pokemon.get('_id')),
-                'numero': pokemon.get('num'), 
-                'nombre':  pokemon.get('name')
-            })
+            for pokemon in coleccion_pokemon:
+                lista_pokemon.append ({
+                    'id':    str(pokemon.get('_id')),
+                    'numero': pokemon.get('num'), 
+                    'nombre':  pokemon.get('name')
+                })
 
-        return jsonify(lista_pokemon)
+            return jsonify(lista_pokemon)
 
-    # Si es POST, comprobamos los parámetros y en caso de correctos, insertamos el Pokémon
+        except:
+            return jsonify(error_BD), 404
+
+    # Si es POST, comprobamos los parámetros y en caso de ser correctos, insertamos el Pokémon
     elif (request.method == 'POST'):
-        lista_pokemon = []
 
         # Hay parámetros
         if (request.form):
@@ -440,43 +467,44 @@ def api_pokemon():
                 nombre = request.form['nombre']
                 img = request.form['img']
 
-                nuevo_pokemon = {"num": numero, "name": nombre, "img": img}
-                model.aniadir_pokemon(nuevo_pokemon)
+                try:
+                    lista_pokemon = []
+                    nuevo_pokemon = {"num": numero, "name": nombre, "img": img}
+                    model.aniadir_pokemon(nuevo_pokemon)
 
-                query = {"name": nombre }
-                coleccion_pokemon = model.get_pokemon(query)
+                    query = { "name": nombre }
+                    coleccion_pokemon = model.get_pokemon(query)
 
-                for pokemon in coleccion_pokemon:
-                    lista_pokemon.append ({
-                        'id':    str(pokemon.get('_id')),
-                        'numero': pokemon.get('num'), 
-                        'nombre':  pokemon.get('name'),
-                        'img': pokemon.get('img')
-                    })
+                    for pokemon in coleccion_pokemon:
+                        lista_pokemon.append ({
+                            'id':    str(pokemon.get('_id')),
+                            'numero': pokemon.get('num'), 
+                            'nombre':  pokemon.get('name'),
+                            'img': pokemon.get('img')
+                        })
 
-                if (lista_pokemon):
-                    return jsonify({
-                        'id': lista_pokemon[-1].get('id'),
-                        'numero': lista_pokemon[-1].get('numero'),
-                        'nombre': lista_pokemon[-1].get('nombre'),
-                        'img': lista_pokemon[-1].get('img')
-                    })
+                    # Si coincide el nombre, número e img con otro Pokémon, mostramos el último
+                    if (lista_pokemon):
+                        return jsonify({
+                            'id': lista_pokemon[-1].get('id'),
+                            'numero': lista_pokemon[-1].get('numero'),
+                            'nombre': lista_pokemon[-1].get('nombre'),
+                            'img': lista_pokemon[-1].get('img')
+                        })
+                except:
+                    return jsonify(error_BD), 404
 
             # No se han introducido los parámetros correctos
             else:
-                return jsonify(({
-                    'error': 400,
-                    'error_mensaje': 'No se han introducido los parametros correctos',
-                    'info': 'Los parametros a introducir son \'numero\', \'nombre\' y \'url_imagen\''
-                }))
-
+                return jsonify(error_parametros_incorrectos), 400
+    
         # No hay parámetros
         else:
-            return jsonify(({
-                'error': 400,
-                'error_mensaje': 'No se han introducido parametros',
-                'info': 'Para una peticion POST has de introducir parametros'
-            }))
+            return jsonify(error_no_parametros), 400
+    
+    # Ni GET ni POST
+    else:
+        return jsonify(error_verbo_peticion), 400
 
 @app.route('/api/filtro_pokemon', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_filtro_pokemon():
