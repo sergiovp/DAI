@@ -411,8 +411,9 @@ def aniadir_pokemon():
 ############################
 
 @app.route('/api/pokemon', methods=['GET', 'POST'])
-def api_get_pokemon():
+def api_pokemon():
 
+    # Si es GET, mostramos todos los Pokémon de la BD
     if (request.method == 'GET'):
         lista_pokemon = []
         coleccion_pokemon = model.get_coleccion_pokemon()
@@ -426,6 +427,7 @@ def api_get_pokemon():
 
         return jsonify(lista_pokemon)
 
+    # Si es POST, comprobamos los parámetros y en caso de correctos, insertamos el Pokémon
     elif (request.method == 'POST'):
         lista_pokemon = []
 
@@ -477,8 +479,10 @@ def api_get_pokemon():
             }))
 
 @app.route('/api/filtro_pokemon', methods=['GET', 'POST'])
-def api_get_filtro_pokemon():
+def api_filtro_pokemon():
     parametros = ''
+    
+    # En este caso, igual que el GET del método anterior pero filtrando por nombre
     if (request.method == 'GET'):
         lista_pokemon = []
 
