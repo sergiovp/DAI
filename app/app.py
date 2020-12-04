@@ -412,6 +412,7 @@ def aniadir_pokemon():
 
 @app.route('/api/pokemon', methods=['GET', 'POST'])
 def api_get_pokemon():
+
     if (request.method == 'GET'):
         lista_pokemon = []
         coleccion_pokemon = model.get_coleccion_pokemon()
@@ -424,6 +425,56 @@ def api_get_pokemon():
             })
 
         return jsonify(lista_pokemon)
+
+    elif (request.method == 'POST'):
+        lista_pokemon = []
+
+        # Hay parámetros
+        if (request.form):
+    
+            # Se han introducido los parámetros correctos
+            if (request.form.get('numero') and request.form.get('nombre') and request.form.get('img')):
+                numero = request.form['numero']
+                nombre = request.form['nombre']
+                img = request.form['img']
+
+                nuevo_pokemon = {"num": numero, "name": nombre, "img": img}
+                model.aniadir_pokemon(nuevo_pokemon)
+
+                query = {"name": nombre }
+                coleccion_pokemon = model.get_pokemon(query)
+
+                for pokemon in coleccion_pokemon:
+                    lista_pokemon.append ({
+                        'id':    str(pokemon.get('_id')),
+                        'numero': pokemon.get('num'), 
+                        'nombre':  pokemon.get('name'),
+                        'img': pokemon.get('img')
+                    })
+
+                if (lista_pokemon):
+                    return jsonify({
+                        'id': lista_pokemon[-1].get('id'),
+                        'numero': lista_pokemon[-1].get('numero'),
+                        'nombre': lista_pokemon[-1].get('nombre'),
+                        'img': lista_pokemon[-1].get('img')
+                    })
+
+            # No se han introducido los parámetros correctos
+            else:
+                return jsonify(({
+                    'error': 400,
+                    'error_mensaje': 'No se han introducido los parametros correctos',
+                    'info': 'Los parametros a introducir son \'numero\', \'nombre\' y \'url_imagen\''
+                }))
+
+        # No hay parámetros
+        else:
+            return jsonify(({
+                'error': 400,
+                'error_mensaje': 'No se han introducido parametros',
+                'info': 'Para una peticion POST has de introducir parametros'
+            }))
 
 @app.route('/api/filtro_pokemon', methods=['GET', 'POST'])
 def api_get_filtro_pokemon():
