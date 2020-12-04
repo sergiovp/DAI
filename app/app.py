@@ -440,6 +440,10 @@ error_BD = ({
     'info': 'Revise el estado de la BD o los filtros introducidos para la búsqueda'
 })
 
+error_ID = ({
+    'error': 'Se debe introducir un ID correcto'
+})
+
 @app.route('/api/pokemon', methods = ['GET', 'POST', 'PUT','DELETE'])
 def api_pokemon():
 
@@ -562,29 +566,24 @@ def api_get_filtro_pokemon(_id):
     if (request.method == 'DELETE'):
         try:
             query = {"_id": ObjectId(_id) }
-            busqueda_pokemon = model.get_pokemon(query)
+        except:
+            return jsonify(error_ID)
 
+        busqueda_pokemon = model.get_one_pokemon(query)
+
+        if (busqueda_pokemon): 
             pokemon = ({
-                'id':    str(busqueda_pokemon[0].get('_id')),
-                'img': busqueda_pokemon[0].get('img'),
-                'numero': busqueda_pokemon[0].get('num'), 
-                'nombre':  busqueda_pokemon[0].get('name')
+                'id':    str(busqueda_pokemon.get('_id')),
+                'img': busqueda_pokemon.get('img'),
+                'numero': busqueda_pokemon.get('num'), 
+                'nombre':  busqueda_pokemon.get('name')
             })
 
-            if (pokemon):
-                model.eliminar_pokemon_id(query)
-                return jsonify(pokemon)
+            model.eliminar_pokemon_query(query)
+            return jsonify(pokemon)
         
-        except:
-            return jsonify(({
-                'error': 404,
-                'error_mensaje': 'No se ha encontrado ningún Pokémon',
-                'info': 'El ID introducido no conincide con el de ningún Pokémon'
-            })), 404
+        else:
+            return jsonify(error_BD), 404
 
     else:
-        return jsonify(({
-            'error': 400,
-            'error_mensaje': 'Petición incorrecta',
-            'info': 'La URL solo admite peticiones DELETE'
-        })), 400
+        return jsonify(error_verbo_peticion), 400
