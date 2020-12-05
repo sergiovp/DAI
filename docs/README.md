@@ -70,3 +70,31 @@ En resumen, las herramientas que utilizaremos son las siguientes:
 
 Tras la realización de la práctica, la web deberá incluir una barra de navegación dando la opción de logearse o registrarse a los usuarios, así como enlaces a otras páginas.
 Un aside o menú lateral junto a un espacio para mostrar contenidos y un footer al final de la web.
+
+## Práctica 4. Bases de Datos NoSQL, CRUD
+
+Se propone utilizar una base de datos no SQL, en este caso MongoDB para mostrar colecciones, poder filtrar documentos, modificar, eliminar y añadir.
+
+Habrá un nuevo ítem en el menú llamado *Pokémon* en el que mostraremos los documentos de nuestra DB con respectivos enlaces para ser modificador y eliminados. Al comienzo de la página habrá un buscador para poder filtrar Pokémon mediante sus nombres haciendo uso de expresiones regulares.
+
+## Práctica 5. API REST
+
+Se propone realizar una API REST, de forma que al terminar la práctica se podrán realizar peticiones con distintos verbos y enviaremos las respuestas oportunas.
+
+Para realizar dichas peticiones podremos utilizar *CURL*.
+
+Ejemplos:
+
++ **curl -X GET localhost:5000/api/pokemon** Nos responderá con todos los Pokémon de nuestra DB
+
++ **curl -X POST localhost:5000/api/pokemon -d "numero=NUMERO&nombre=NOMBRE&img=URL_IMG"** Añadirá a la BD el Pokémon con NÚMERO, NOMBRE y URL_IMAGEN especificados
+
++ **curl -X DELETE localhost:5000/api/delete/ID** Eliminará el Pokémon cuyo ID coincida con el de la URL
+
++ **curl -X GET localhost:5000/api/filtro_pokemon?name=NAME** Nos mostrará los Pokémon cuyo nombre se asemeje al NAME introducido
+
++ **curl -X PUT localhost:5000/api/mod_pokemon/ID -d "numero=NUMERO&nombre=NOMBRE&img=URL_IMG"** Modificará los datos del Pokémon cuyo ID coincida con el introducido. Dichos datos serán sustituidos por NUMERO, NOMBRE y URL_IMAGEN
+
+Las funciones serán tolerantes a fallos, de forma que se informe al usuario en caso de realizar mal la petición, por ejemplo, por no introducir parámetros, que los parámetros sean incorrectos o quetratemos de realizar una petición con el verbo equivocado.
+
+En cualquier caso, el usuario recibirá la respuesta en formato JSON.
