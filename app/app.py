@@ -587,3 +587,51 @@ def api_del_pokemon(_id):
 
     else:
         return jsonify(error_verbo_peticion), 400
+
+@app.route('/api/mod_pokemon/<_id>', methods = ['GET', 'POST', 'PUT','DELETE'])
+def api_mod_pokemon(_id):
+    if (request.method == 'PUT'):
+
+        # Hay parámetros
+        if (request.form):
+
+            # Se han introducido los parámetros correctos
+            if (request.form.get('numero') and request.form.get('nombre') and request.form.get('img')):
+                pokemon = ''
+                numero = request.form['numero']
+                nombre = request.form['nombre']
+                img = request.form['img']
+
+                try:
+                    query = {"_id": ObjectId(_id) }
+                except:
+                    return jsonify(error_ID)
+
+                busqueda_pokemon = model.get_one_pokemon(query)
+
+                if (busqueda_pokemon):
+                    valor_nuevo = { "$set": { "num": numero, "name": nombre, "img": img }}
+
+                    model.modificar_pokemon(query, valor_nuevo)
+
+                    busqueda_pokemon = model.get_one_pokemon(query)
+
+                    pokemon = ({
+                        'id':    str(busqueda_pokemon.get('_id')),
+                        'img': busqueda_pokemon.get('img'),
+                        'numero': busqueda_pokemon.get('num'), 
+                        'nombre':  busqueda_pokemon.get('name')
+                    })
+                    return jsonify(pokemon)
+                
+                else:
+                    return jsonify(error_BD), 404
+
+            else:
+                return jsonify(error_no_parametros), 400
+
+        else:
+            return jsonify(error_parametros_incorrectos1), 400
+
+    else:
+        return jsonify(error_verbo_peticion), 400
