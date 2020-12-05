@@ -53,3 +53,6 @@ def aniadir_pokemon(nuevo_pokemon):
 
 def eliminar_pokemon_query(query):
     db.samples_pokemon.delete_one(query)
+
+def get_one_pokemon(query):
+    return (db.samples_pokemon.find_one(query))
