@@ -470,7 +470,7 @@ def api_pokemon():
 
         # Hay parámetros
         if (request.form):
-    
+
             # Se han introducido los parámetros correctos
             if (request.form.get('numero') and request.form.get('nombre') and request.form.get('img')):
                 numero = request.form['numero']
@@ -506,11 +506,11 @@ def api_pokemon():
             # No se han introducido los parámetros correctos
             else:
                 return jsonify(error_parametros_incorrectos1), 400
-    
+
         # No hay parámetros
         else:
             return jsonify(error_no_parametros), 400
-    
+
     # Ni GET ni POST
     else:
         return jsonify(error_verbo_peticion), 400
@@ -560,7 +560,7 @@ def api_filtro_pokemon():
 
 # Función creada para eliminar un Pokémon mediante el verbo PUT
 @app.route('/api/del_pokemon/<_id>', methods = ['GET', 'POST', 'PUT','DELETE'])
-def api_get_filtro_pokemon(_id):
+def api_del_pokemon(_id):
     pokemon = ''
 
     if (request.method == 'DELETE'):
