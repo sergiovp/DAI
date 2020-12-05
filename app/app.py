@@ -456,7 +456,8 @@ def api_pokemon():
             lista_pokemon.append ({
                 'id':    str(pokemon.get('_id')),
                 'numero': pokemon.get('num'), 
-                'nombre':  pokemon.get('name')
+                'nombre':  pokemon.get('name'),
+                'img': pokemon.get('img')
             })
 
         if (lista_pokemon):
