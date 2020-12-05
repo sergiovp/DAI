@@ -316,7 +316,7 @@ def interfaz_ejercicios(nombre, ejercicio):
     if (ejercicio == 'burbuja' or ejercicio == 'seleccion' or
         ejercicio == 'criba' or ejercicio == 'fibonacci' or
         ejercicio == 'corchetes' or ejercicio == 'correo' or
-        ejercicio == 'tarjeta' or ejercicio == 'palabra' or ejercicio == 'palabra'):
+        ejercicio == 'tarjeta' or ejercicio == 'palabra' or ejercicio == 'svg'):
 
         update_paginas('/interfaz_ejercicios/' + nombre + '/' + ejercicio, nombre)
     else:
