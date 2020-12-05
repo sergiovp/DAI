@@ -71,11 +71,15 @@ En resumen, las herramientas que utilizaremos son las siguientes:
 Tras la realización de la práctica, la web deberá incluir una barra de navegación dando la opción de logearse o registrarse a los usuarios, así como enlaces a otras páginas.
 Un aside o menú lateral junto a un espacio para mostrar contenidos y un footer al final de la web.
 
+Para más detalle sobre la práctica, consultad [este enlace](https://swad.ugr.es/swad/tmp/Wl/iMFrGVbvdoesIzIBDoPmkDMdTdh29t5H1YkUbxz18/DAI%20Practica%203%20-%20Plantillas_%20Sesiones_%20Frameworks%20CSS.html).
+
 ## Práctica 4. Bases de Datos NoSQL, CRUD
 
 Se propone utilizar una base de datos no SQL, en este caso MongoDB para mostrar colecciones, poder filtrar documentos, modificar, eliminar y añadir.
 
 Habrá un nuevo ítem en el menú llamado *Pokémon* en el que mostraremos los documentos de nuestra DB con respectivos enlaces para ser modificador y eliminados. Al comienzo de la página habrá un buscador para poder filtrar Pokémon mediante sus nombres haciendo uso de expresiones regulares.
+
+Para más detalle sobre la práctica, consultad [este enlace](https://swad.ugr.es/swad/tmp/7y/zUpCI3tQ4pBRwnCKG7sNaw4Kr4KzgJg9ufYcnHQ0o/DAI%20Practica%204%20-%20Bases%20de%20Datos%20NoSQL_%20CRUD.html).
 
 ## Práctica 5. API REST
 
@@ -98,3 +102,5 @@ Ejemplos:
 Las funciones serán tolerantes a fallos, de forma que se informe al usuario en caso de realizar mal la petición, por ejemplo, por no introducir parámetros, que los parámetros sean incorrectos o quetratemos de realizar una petición con el verbo equivocado.
 
 En cualquier caso, el usuario recibirá la respuesta en formato JSON.
+
+Para más detalle sobre la práctica, consultad [este enlace](https://swad.ugr.es/swad/tmp/Qr/8fGYJEFMh-DVAt7hNkqiYYrqZ4qir-vOBveebU3Dg/DAI%20Practica%205%20-%20API%20REST.html).
