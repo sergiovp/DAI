@@ -70,7 +70,7 @@ def is_balanceado(corchetes):
     for i in corchetes: 
         if i in corchete_abierto: 
             pila.append(i) 
-        
+ 
         elif i in corchete_cerrado: 
             pos = corchete_cerrado.index(i) 
             if ((len(pila) > 0) and (corchete_abierto[pos] == pila[len(pila) -1])): 
@@ -82,7 +82,7 @@ def is_balanceado(corchetes):
         return True
     else:
         return False
-    
+ 
 # Nos devuelve si el nombre de un correo es válido
 def check_correo(correo):
     expresion = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
@@ -128,7 +128,7 @@ def crear_figura():
     svg_start = '<svg width="1200" height="390">'
     svg_circle = '<circle cx="'+str(cx)+'" cy="'+str(cy)+'" r="'+str(r)+'" stroke="'+borde_r+'" stroke-width="1" fill="'+color_r+'" />'
     svg_end = '</svg>'
-    
+
     svg_rectangle = '<rect x="'+str(rx)+'" y="'+str(ry)+'"  width="'+str(width)+'" height="'+str(height)+'"fill="'+color_c+'"stroke="'+borde_c+'"/>'
 
     return svg_start + svg_circle + svg_rectangle + svg_end
