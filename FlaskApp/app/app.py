@@ -3,6 +3,8 @@ Sergio Vela Pelegrina.
 
 Desarrollo de Aplicaciones para Internet.
 
+Aplicación web utilizando Flask y MongoDB.
+
 Ingeniería Informática UGR (2020/21).
 '''
 
@@ -78,7 +80,7 @@ def fibonacci(numero):
 @app.route('/corchetes/<corchetes>')
 def corchetes_balanceados(corchetes):
     mensaje = "' NO está balanceada"
-    
+
     balanceada = ejercicios.is_balanceado(corchetes)
 
     if (balanceada):
@@ -93,7 +95,7 @@ def validar_correo(correo):
 
     if (valido):
         msg = "El correo '" + correo + "' SÍ es valido"
-    
+
     return msg
 
 @app.route('/validar_tarjeta/<tarjeta>')
