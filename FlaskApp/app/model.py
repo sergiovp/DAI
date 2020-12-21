@@ -1,8 +1,6 @@
 from pickleshare import *
 
-'''
-    Para Pickleshare
-'''
+# Para Pickleshare
 
 def start_db():
     data_base = PickleShareDB('usuarios_db')
@@ -26,9 +24,8 @@ def delete_user(usuario):
 def update_user_pass(user, password):
     data_base[user] = {'password': password}
 
-'''
-    Para MongoDB
-'''
+# Para MongoDB:
+
 import pymongo
 from pymongo import MongoClient
 
