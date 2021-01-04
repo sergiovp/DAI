@@ -1,0 +1,36 @@
+body {
+    background-color: #e3f2fd;
+}
+
+/* Reglas para el Footer (Pie de página) */
+.pie_pagina {
+    background-color: #e3f2fd;
+    border-top: solid;
+    border-width: thin;
+    margin-top: 1.1rem;
+    border-color: #cbe7fb;
+}
+
+.pie_contacto {
+    text-align: center;
+}
+
+#footer-botones > div {
+    display: block;
+}
+
+.seccion_copyright {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.btn-toolbar {
+    display: block;
+    text-align: center;
+}
+
+#footer-botones {
+    display: list-item;
+    border: none;
+}
