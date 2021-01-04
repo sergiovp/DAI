@@ -19,21 +19,27 @@
 
     {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Biblioteca</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Biblioteca</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                </li>
+                {% block item_inicio %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Libros</a>
+                {% endblock %}
+                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a>
                 </li>
+                {% block item_libros %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Préstamos</a>
+                {% endblock %}
+                    <a class="nav-link" href="{% url 'libros' %}">Libros</a>
+                </li>
+                {% block item_prestamos %}
+                <li class="nav-item">
+                {% endblock %}
+                    <a class="nav-link" href="{% url 'prestamos' %}">Préstamos</a>
                 </li>
           </ul>
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -56,6 +62,8 @@
         </div>
       </nav>
     {% endblock %}
+
+    {% block contenido_principal_inicio %}{% endblock %}
 
 
     <!--Footer. Será el mismo para todas las páginas (heredado) salvo registro y login-->
