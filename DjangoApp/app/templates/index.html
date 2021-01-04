@@ -1,3 +1,44 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Inicio{% endblock %}
+
+{% block item_inicio %}
+    <li class="nav-item active">
+{% endblock %}
+
+{% block contenido_principal_inicio %}
+   <div class="container">
+       <div class="row">
+           <div class="col-md-8 col-sm-12 hola" id="bloque-main">
+               <h4>Desarrollo de Aplicaciones para Interet</h4>
+                <p>Bienvenido a las prácticas de la asignatura DAI. Dicha asignatura pertenede
+                    a la rama de Tecnologías de la Información y consiste en el desarrollo de aplicaciones
+                    webs. En este caso, la desarrollaremos en Python haciendo uso de distintos 
+                    frameworks y tecnologías. Se puede ver el avance de las prácticas pinchando en el
+                    icono de GitHub que se encuentra en el footer.
+                </p>
+                <h5>Listado de prácticas resueltas hasta la fecha:</h5>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/20/c96ziOVodTWYn-S-cJZEvMxA5Q52LiCkq2j7Xc7vk/DAI%20Practica%201%20-%20Python%20y%20entorno%20de%20trabajo.html">Python y entorno de trabajo con docker</a></p>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/DW/7QhAUe706Uowcq3kE9NGB3Al1uGJ5JXpqFU0wxGEM/DAI%20Practica%202%20-%20Microframework%20Flask.html">Microframework Flask</a></p>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/Wl/iMFrGVbvdoesIzIBDoPmkDMdTdh29t5H1YkUbxz18/DAI%20Practica%203%20-%20Plantillas_%20Sesiones_%20Frameworks%20CSS.html">Plantillas, Manejo de Sesiones y Frameworks CSS</a></p>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/7y/zUpCI3tQ4pBRwnCKG7sNaw4Kr4KzgJg9ufYcnHQ0o/DAI%20Practica%204%20-%20Bases%20de%20Datos%20NoSQL_%20CRUD.html">Bases de Datos NoSQL, CRUD</a></p>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/Qr/8fGYJEFMh-DVAt7hNkqiYYrqZ4qir-vOBveebU3Dg/DAI%20Practica%205%20-%20API%20REST.html">API REST</a></p>
+                <p><a target="_blank" href="https://swad.ugr.es/swad/tmp/ui/cGjd1fBuKlr6YnhKP_h-Naw51L8p8rnxjoXpx-9Fk/DAI%20Practica%206%20-%20Django.html">Django</a></p>
+           </div>
+           <div class="col-md-4 col-sm-12 hola" id="bloque-enlaces-interes">
+               <h4>Enlaces de interés:</h4>
+                <p><a target="_blank" href="https://swad.ugr.es/es">SWAD</a></p>
+                <p><a target="_blank" href="https://www.ugr.es">Universidad de Granada</a></p>
+                <p><a target="_blank" 
+                    href="https://lsi.ugr.es/lsi/system/files/guias_docentes/ETSIIT_GII_DAI_2021_DesarrolloAplIcacionesnternet.pdf">
+                    Guía docente DAI</a>
+                </p>
+                <p><a target="_blank" 
+                    href="https://pylessons.com/Python-3-basics-tutorial-home/">
+                    Curso de Python</a>
+                </p>
+                <p><a target="_blank" href="https://flask.palletsprojects.com/en/1.1.x/">Documentación de Flask</a></p>
+           </div>
+       </div>
+   </div>
+{% endblock %}
