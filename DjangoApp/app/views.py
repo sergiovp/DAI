@@ -12,3 +12,8 @@ def test_template(request):
 def index(request):
     return render(request, 'index.html')
 
+def libros(request):
+    return render(request, 'libros.html')
+
+def prestamos(request):
+    return render(request, 'prestamos.html')
