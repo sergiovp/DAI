@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .forms import NameForm
+from .forms import *
 
 # Create your views here.
 
