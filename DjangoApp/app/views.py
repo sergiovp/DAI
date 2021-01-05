@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from .forms import NameForm
 
 # Create your views here.
 
@@ -17,3 +18,9 @@ def libros(request):
 
 def prestamos(request):
     return render(request, 'prestamos.html')
+
+def registro(request):
+    return render(request, 'registro.html')
+
+def login(request):
+    return render(request, 'login.html')
