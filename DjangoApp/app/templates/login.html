@@ -3,11 +3,9 @@
 {% block titulo %}LogIn{% endblock %}
 
 {% block formulario %}
-        <form method="POST">
-            <input type="text" id="login" class="fadeIn second"
-                name="usuario" placeholder="Usuario..." value="{{request.form.username }}">
-            <input type="password" id="password" class="fadeIn third"
-                name="password" placeholder="Contraseña...">
-            <input type="submit" class="fadeIn fourth" value="LogIn">
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="LogIn">
         </form>
 {% endblock %}
