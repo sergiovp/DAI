@@ -1,0 +1,17 @@
+{% extends "base_form.html" %}
+
+{% block titulo %}Añadir libro{% endblock %}
+
+{% block formulario %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Añadir">
+        </form>
+{% endblock %}
+
+{% block volver_atras %}
+        <div id="formFooter">
+            <a class="underlineHover" href="{% url 'libros' %}">Volver atrás</a>
+        </div>
+{% endblock %}
