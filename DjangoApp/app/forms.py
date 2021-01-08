@@ -1,15 +1,14 @@
 from django import forms
 from .models import *
-from django.contrib.auth.models import User
 
 class registro_form(forms.ModelForm):
     class Meta:
         password = forms.CharField(widget = forms.PasswordInput)
-        model = User
+        model = Usuarios
         widgets = {'password': forms.PasswordInput()}
-        fields = ('username', 'password',)
+        fields = ('usuario', 'password',)
         help_texts = {
-            'username': None,
+            'usuario': None,
         }
 
 class login_form(forms.Form):
