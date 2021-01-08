@@ -7,5 +7,6 @@
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="LogIn">
+            <p style="color: red;">{{mensaje}}</p>
         </form>
 {% endblock %}
