@@ -5,3 +5,21 @@
 {% block item_prestamos %}
     <li class="nav-item active">
 {% endblock %}
+
+{% block contenido_prestamos %}
+<div class="container">
+    <h2 style="text-align: center;">Bienvenido, aquí puedes ver todos los libros reservados</h2> 
+</div>
+
+<div class="container" style="text-align: center;">
+    {% for i in prestamos %}
+            <div class="libros">
+                <div class="colum" id="libro">
+                    <p>Libro: {{i.libro}}</p>
+                    <p>Fecha: {{i.fecha}}</p>
+                    <p>Persona: {{i.usuario}}</p>
+                </div>
+            </div>
+    {% endfor %}
+</div>
+{% endblock %}
