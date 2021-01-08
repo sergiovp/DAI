@@ -5,3 +5,39 @@
 {% block item_libros %}
     <li class="nav-item active">
 {% endblock %}
+
+{% block contenido_libros %}
+    <div class="container">
+        <h2 style="text-align: center;">Bienvenido, aquí puedes ver todos los libros</h2> 
+    </div>
+    <div class="container">
+        <div class="buscador-nombre"style="text-align: center;">
+            <p><a href="{% url 'add_libro' %}">
+                <span class="id-nombre">Añadir</span></a> un nuevo libro.
+            </p>
+        </div>
+    </div>
+
+    <div class="container" style="text-align: center;">
+        {% for i in libros %}
+                <div class="libros">
+                    <div class="colum" id="libro">
+                        <p>Título: {{i.titulo}}</p>
+                        <p>Autor: {{i.autor}}</p>
+                        <p>Año: {{i.anio}}</p>
+                        {% if not i.reservado %}
+                        {% if usuario %}
+                            <p><a href="{% url 'reservar_libro' i.id %}">Reservar</a></p>
+                        {% endif %}
+                        {% else %}
+                        <p style="color: red;">Reservado</p>
+                        {% endif %}
+                        {% if usuario == 'admin' %}
+                        <p><a href="{% url 'modificar_libro' i.id %}">Modificar</a></p>
+                        <p><a href="{% url 'eliminar_libro' i.id %}">Eliminar</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}
