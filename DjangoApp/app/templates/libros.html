@@ -12,9 +12,11 @@
     </div>
     <div class="container">
         <div class="buscador-nombre"style="text-align: center;">
-            <p><a href="{% url 'add_libro' %}">
-                <span class="id-nombre">Añadir</span></a> un nuevo libro.
-            </p>
+            {% if usuario == 'admin' %}
+                <p><a href="{% url 'add_libro' %}">
+                    <span class="id-nombre">Añadir</span></a> un nuevo libro.
+                </p>
+            {% endif %}
         </div>
     </div>
 
@@ -22,17 +24,17 @@
         {% for i in libros %}
                 <div class="libros">
                     <div class="colum" id="libro">
-                        <p>Título: {{i.titulo}}</p>
-                        <p>Autor: {{i.autor}}</p>
-                        <p>Año: {{i.anio}}</p>
+                        <p>Título: <span class="datos_libro">{{ i.titulo }}</span></p>
+                        <p>Autor: <span class="datos_libro">{{ i.autor }}</p></span>
+                        <p>Año: <span class="datos_libro">{{ i.anio }}</p></span>
                         {% if not i.reservado %}
-                        {% if usuario %}
+                        {% if usuario and usuario != 'admin' %}
                             <p><a href="{% url 'reservar_libro' i.id %}">Reservar</a></p>
                         {% endif %}
                         {% else %}
                         <p style="color: red;">Reservado</p>
                         {% endif %}
-                        {% if usuario == 'admin' %}
+                        {% if usuario == 'admin' and not i.reservado %}
                         <p><a href="{% url 'modificar_libro' i.id %}">Modificar</a></p>
                         <p><a href="{% url 'eliminar_libro' i.id %}">Eliminar</a></p>
                         {% endif %}
