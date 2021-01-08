@@ -7,21 +7,14 @@ class Libros(models.Model):
     titulo = models.CharField(max_length = 50)
     autor  = models.CharField(max_length = 50)
     anio = models.IntegerField()
+    reservado = models.BooleanField(default = False)
 
     def __str__(self):
-        return "%s %s %i" % (self.titulo, self.autor,self.anio)
+        return "%s %s %i %i" % (self.titulo, self.autor, self.anio, self.reservado)
 
-class prestamos(models.Model):
+class Prestamos(models.Model):
     libro = models.ForeignKey(Libros, on_delete = models.CASCADE)
     fecha = models.DateField(default = timezone.now)
-    usuario = models.CharField(max_length = 50)
 
     def __str__(self):
         return "%s" % (self.usuario)
-
-class usuarios(models.Model):
-    usuario = models.CharField(max_length = 50)
-    password = models.CharField(max_length = 50)
-
-    def __str__(self):
-        return "%s %s" % (self.usuario, self.password)
