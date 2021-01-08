@@ -39,18 +39,21 @@
                     <a class="nav-link" href="{% url 'libros' %}">Libros</a>
                 </li>
                 {% block item_prestamos %}
+            
                 <li class="nav-item">
                 {% endblock %}
+                {% if usuario %}
                     <a class="nav-link" href="{% url 'prestamos' %}">Préstamos</a>
                 </li>
+                {% endif %}
           </ul>
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 {% if usuario %}
-                <div class="btn-group mr-1">
-                    <p id="mensaje-bienvenida">Bienvenido <span class="nombre-usuario">{{ usuario }}</span></p>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <a role="button" href="" type="button" class="btn btn-outline-dark"> Bienvenido {{ usuario }}</a>
                 </div>
                 <div id="bienvenida-boton" class="btn-group mr-2" role="group" aria-label="First group">   
-                    <a role="button" href="" type="button" class="btn btn-outline-danger">LogOut</a>
+                    <a role="button" href="{% url 'logout' %}" type="button" class="btn btn-outline-danger">LogOut</a>
                 </div>
                 {% else %}
                 <div class="btn-group mr-2" role="group" aria-label="First group">
@@ -67,6 +70,8 @@
 
     {% block contenido_principal_inicio %}{% endblock %}
     {% block contenido_formulario_login %}{% endblock %}
+    {% block contenido_libros %}{% endblock %}
+    {% block contenido_prestamos %}{% endblock %}
 
     <!--Footer. Será el mismo para todas las páginas (heredado) salvo registro y login-->
     {% block footer %}
