@@ -15,9 +15,11 @@
     {% for i in prestamos %}
             <div class="libros">
                 <div class="colum" id="libro">
-                    <p>Libro: {{i.libro}}</p>
-                    <p>Fecha: {{i.fecha}}</p>
-                    <p>Persona: {{i.usuario}}</p>
+                    <p>Título: <span class="datos_reserva">{{ i.libro.titulo }}</span></p>
+                    <p>Autor: <span class="datos_reserva">{{ i.libro.autor }}</span></p>
+                    <p>Año: <span class="datos_reserva">{{ i.libro.anio }}</span></p>
+                    <p>Fecha: <span class="datos_reserva">{{ i.fecha }}</span></p>
+                    <p>Reservado por: <span class="datos_reserva">{{ i.usuario }}</span></p>
                 </div>
             </div>
     {% endfor %}
