@@ -41,3 +41,9 @@
 #libro {
     margin-right: 2em;
 }
+
+/* Página préstamos */
+.datos_reserva, .datos_libro {
+    color: blue;
+    text-decoration: underline;
+}
