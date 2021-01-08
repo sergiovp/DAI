@@ -29,3 +29,15 @@
     display: list-item;
     border: none;
 }
+
+/* Página libros */
+
+
+.libros {
+    display: inline-block;
+    text-align: center;
+}
+
+#libro {
+    margin-right: 2em;
+}
