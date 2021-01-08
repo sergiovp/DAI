@@ -14,7 +14,15 @@ class Libros(models.Model):
 
 class Prestamos(models.Model):
     libro = models.ForeignKey(Libros, on_delete = models.CASCADE)
+    usuario = models.CharField(max_length = 50)
     fecha = models.DateField(default = timezone.now)
 
     def __str__(self):
         return "%s" % (self.usuario)
+
+class Usuarios(models.Model):
+    usuario = models.CharField(max_length = 50)
+    password = models.CharField(max_length = 50)
+
+    def __str__(self):
+        return "%s %s" % (self.usuario, self.password)
