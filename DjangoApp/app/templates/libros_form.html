@@ -3,7 +3,7 @@
 {% block titulo %}Añadir libro{% endblock %}
 
 {% block formulario %}
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Añadir">
