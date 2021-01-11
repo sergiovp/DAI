@@ -8,6 +8,7 @@ class Libros(models.Model):
     autor  = models.CharField(max_length = 50)
     anio = models.IntegerField()
     reservado = models.BooleanField(default = False)
+    libro_img = models.ImageField(upload_to = 'images/')
 
     def __str__(self):
         return "%s %s %i %i" % (self.titulo, self.autor, self.anio, self.reservado)
