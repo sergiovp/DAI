@@ -18,7 +18,7 @@ class login_form(forms.Form):
 class add_libro_form(forms.ModelForm):
     class Meta:
         model = Libros
-        fields = ('titulo', 'autor', 'anio',)
+        fields = ('titulo', 'autor', 'anio', 'libro_img',)
 
 class set_libro_form(forms.ModelForm):
     class Meta:
