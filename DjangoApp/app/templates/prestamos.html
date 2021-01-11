@@ -15,6 +15,7 @@
     {% for i in prestamos %}
             <div class="libros">
                 <div class="colum" id="libro">
+                    <img id="img_libro" src="../../media/{{ i.libro.libro_img }}" alt="Imagen libro"/>
                     <p>Título: <span class="datos_reserva">{{ i.libro.titulo }}</span></p>
                     <p>Autor: <span class="datos_reserva">{{ i.libro.autor }}</span></p>
                     <p>Año: <span class="datos_reserva">{{ i.libro.anio }}</span></p>
