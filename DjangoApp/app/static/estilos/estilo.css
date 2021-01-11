@@ -47,3 +47,9 @@
     color: blue;
     text-decoration: underline;
 }
+
+/* Imágenes libros */
+#img_libro{
+    width: 5em;
+    height: 8em;
+}
