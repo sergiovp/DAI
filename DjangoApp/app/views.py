@@ -44,7 +44,7 @@ def add_libro(request):
         usuario = get_user_session(request)
 
     if (request.method == 'POST'):
-        form = add_libro_form(request.POST)
+        form = add_libro_form(request.POST, request.FILES)
 
         if (form.is_valid()):
             form.save()
@@ -91,8 +91,7 @@ def modificar_libro(request, identificador):
     libro = Libros.objects.filter(id = identificador)
 
     if (request.method == 'POST'):
-        form = set_libro_form(request.POST)
-
+        form = set_libro_form(request.POST, request.FILES)
         if (form.is_valid()):
             titulo = request.POST.get('titulo')
             autor = request.POST.get('autor')
