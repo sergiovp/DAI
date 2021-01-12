@@ -21,6 +21,9 @@
                     <p>Año: <span class="datos_reserva">{{ i.libro.anio }}</span></p>
                     <p>Fecha: <span class="datos_reserva">{{ i.fecha }}</span></p>
                     <p>Reservado por: <span class="datos_reserva">{{ i.usuario }}</span></p>
+                    {% if usuario == i.usuario or usuario == 'admin' %}
+                    <p><a href="{% url 'eliminar_reserva' i.id i.libro.id %}">Eliminar reserva</a></p>
+                    {% endif %}
                 </div>
             </div>
     {% endfor %}
