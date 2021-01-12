@@ -15,6 +15,7 @@ urlpatterns = [
     path('modificar_libro/<int:identificador>', views.modificar_libro, name='modificar_libro'),
     path('logout', views.logout, name='logout'),
     path('reservar_libro/<int:identificador>', views.reservar_libro, name='reservar_libro'),
+    path('eliminar_reserva/<int:identificador_prestamo>/<int:identificador_libro>', views.eliminar_reserva, name='eliminar_reserva'),
 ]
 
 if settings.DEBUG: 
