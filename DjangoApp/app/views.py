@@ -75,8 +75,6 @@ def reservar_libro(request, identificador):
 
     prestamo.usuario = usuario
 
-    print(usuario)
-
     prestamo.save()
     libros = Libros.objects.all()
 
@@ -124,6 +122,26 @@ def eliminar_libro(request, identificador):
     libros = Libros.objects.all()
 
     return render(request, 'libros.html', {'libros': libros, 'usuario': usuario})
+
+def eliminar_reserva(request, identificador_prestamo, identificador_libro):
+    global usuario
+
+    if (check_session(request)):
+        usuario = get_user_session(request)
+
+    prestamo = Prestamos()
+    libro = Libros()
+
+    Prestamos.objects.filter(id = identificador_prestamo).delete()
+
+    Libros.objects.filter(id = identificador_libro).update(
+        reservado = False
+    )
+
+    prestamo = Prestamos.objects.all()
+
+
+    return render(request, 'prestamos.html', {'usuario': usuario, 'prestamos': prestamo})
 
 def prestamos(request):
     global usuario
