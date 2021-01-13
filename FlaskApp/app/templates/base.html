@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
         crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>{% block titulo %}Bienvenido{% endblock %}</title>
     
     <!--El siguiente bloque es por si es necesario añadir algún link en alguna página-->
@@ -123,6 +125,31 @@
                     </div>
                 </li>
                 {% endif %}
+
+                <div class="cambio-boton">
+                    <div class="cambio-oscuro">
+                        <button type="button" id="boton-oscuro" name="" class="btn btn-dark">Modo noche</button>
+                    </div>
+                    <div class="cambio-claro">
+                        <button type="button" id="boton-claro" name="" class="btn btn-light">Modo día</button>
+                    </div>
+                </div>
+
+                <script>
+                    $(document).ready(function check() {
+                        temaOscuro();
+
+                        $('#boton-oscuro').click(function () {
+                            localStorage.setItem('isDarkMode', true);
+                            check();
+                        });
+
+                        $('#boton-claro').click(function() {
+                            localStorage.setItem('isDarkMode', false);
+                            check();
+                        });
+                    });
+                </script>
             </ul>
             
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
