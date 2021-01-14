@@ -39,8 +39,8 @@
                 <div class="colum">
                     <img src="{{i.img}}" alt="">
                     <p>{{i.num}} | {{i.name}}</p>
-                    <p><a href="{{ url_for('modificar_pokemon', nombre=i.name)}}">Modificar</a></p>
-                    <p><a href="{{ url_for('eliminar_pokemon', nombre=i.name)}}">Eliminar</a></p>
+                    <p><a href="{{ url_for('modificar_pokemon', _id=i._id)}}">Modificar</a></p>
+                    <p><a href="{{ url_for('eliminar_pokemon', _id=i._id)}}">Eliminar</a></p>
                 </div>
             </div>
         {% else %}
@@ -48,8 +48,8 @@
                 <div class="colum">
                     <img src="{{i.img}}" alt="">
                     <p>{{i.num}} | {{i.name}}</p>
-                    <p><a href="{{ url_for('modificar_pokemon', nombre=i.name)}}">Modificar</a></p>
-                    <p><a href="{{ url_for('eliminar_pokemon', nombre=i.name)}}">Eliminar</a></p>
+                    <p><a href="{{ url_for('modificar_pokemon', _id=i._id)}}">Modificar</a></p>
+                    <p><a href="{{ url_for('eliminar_pokemon', _id=i._id)}}">Eliminar</a></p>
                 </div>
             </div>
         {% endif %}
