@@ -367,27 +367,54 @@ def eliminar_pokemon(nombre):
 
     return redirect(url_for('pokedex'))
 
-@app.route('/modificar_pokemon/<nombre>/', methods=['GET', 'POST'])
-def modificar_pokemon(nombre):
+@app.route('/modificar_pokemon/<_id>/', methods=['GET', 'POST'])
+def modificar_pokemon(_id):
     mensaje = ''
 
+    try:
+        query = {"_id": ObjectId(_id) }
+    except:
+        return jsonify(error_ID)
+
+    busqueda_pokemon = model.get_one_pokemon(query)
+
+    numero = busqueda_pokemon.get('num')
+    nombre = busqueda_pokemon.get('name')
+    img = busqueda_pokemon.get('img')
+
     if (request.method == 'POST'):
-        nuevo_nombre = request.form['nuevo-nombre']
-        if (nuevo_nombre):
-            query = { "name": nombre }
-            valor_nuevo = { "$set": { "name": nuevo_nombre }}
+
+        if (request.form['nuevo-numero']):
+            nuevo_numero = request.form['nuevo-numero']
+        else:
+            nuevo_numero = numero
+
+        if (request.form['nuevo-nombre']):
+            nuevo_nombre = request.form['nuevo-nombre']
+        else:
+            nuevo_nombre = nombre
+
+        if (request.form['nueva-imagen']):
+            nueva_imagen = request.form['nueva-imagen']
+        else:
+            nueva_imagen = img
+
+        if (nuevo_nombre or nuevo_numero or nueva_imagen):
+            valor_nuevo = { "$set": { "num": nuevo_numero, "name": nuevo_nombre, "img": nueva_imagen }}
 
             model.modificar_pokemon(query, valor_nuevo)
 
             return redirect(url_for('pokedex'))
-            # No se ha introducido un nombre
+
+            # No se han introducido parámetros
         else:
-            mensaje = 'No has introducido un nuevo nombre'
+            mensaje = 'No has introducido nuevos valores, no hay nada que modificar'
             return render_template('modificar_pokemon.html', 
-                nombre = nombre, mensaje = mensaje)
+                numero = numero, nombre = nombre, img = img, mensaje = mensaje)
 
     
-    return render_template('modificar_pokemon.html', nombre = nombre)
+    return render_template('modificar_pokemon.html', 
+        numero = numero, nombre = nombre, img = img)
 
 @app.route('/aniadir_pokemon', methods=['GET', 'POST'])
 def aniadir_pokemon():
