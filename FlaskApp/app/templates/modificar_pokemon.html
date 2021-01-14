@@ -4,10 +4,14 @@
 
 {% block formulario %}
     <form method="POST">
-        <input type="text" id="login" class="fadeIn second"
-            name="usuario" value="{{nombre}}" disabled>
-        <input type="text" id="login" class="fadeIn second"
+
+        <label for="num">Número:</label><input type="text" id="num" value="{{ numero }}" class="fadeIn second"
+            name="nuevo-numero" placeholder="Nuevo número">
+        <label for="nom">Nombre:</label><input type="text" id="nom" value="{{ nombre }}" class="fadeIn second"
             name="nuevo-nombre" placeholder="Nuevo nombre">
+        <label for="img">Imagen:</label><input type="text" id="img" value="{{ img }}" class="fadeIn second"
+            name="nueva-imagen" placeholder="Nueva imagen">
+
         <input type="submit" class="fadeIn fourth" value="Modificar">
     </form>
 {% endblock %}
