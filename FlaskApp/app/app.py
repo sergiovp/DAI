@@ -361,9 +361,14 @@ def pokedex():
     return render_template('pokemon.html', todos_pokemon = todos_pokemon,
         paginas = paginas, usuario = usuario, parametros = parametros)
 
-@app.route('/eliminar_pokemon/<nombre>/')
-def eliminar_pokemon(nombre):
-    model.eliminar_pokemon(nombre)
+@app.route('/eliminar_pokemon/<_id>/')
+def eliminar_pokemon(_id):
+    try:
+        query = {"_id": ObjectId(_id) }
+    except:
+        return jsonify(error_ID)
+
+    model.eliminar_pokemon_query(query)
 
     return redirect(url_for('pokedex'))
 
