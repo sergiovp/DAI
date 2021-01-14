@@ -125,3 +125,9 @@ body.dark-mode .pokemon-impares {
     background-color: darkslategray;
     text-align: center;
 }
+
+/* Para las imágenes de Pokémon */
+body > div > div > div > div > img {
+    width: 120px;
+    height: 120px;
+}
