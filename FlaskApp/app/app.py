@@ -599,11 +599,8 @@ def api_mod_pokemon(_id):
         if (request.form):
 
             # Se han introducido los parámetros correctos
-            if (request.form.get('numero') and request.form.get('nombre') and request.form.get('img')):
+            if (request.form.get('numero') or request.form.get('nombre') or request.form.get('img')):
                 pokemon = ''
-                numero = request.form['numero']
-                nombre = request.form['nombre']
-                img = request.form['img']
 
                 try:
                     query = {"_id": ObjectId(_id) }
@@ -611,6 +608,21 @@ def api_mod_pokemon(_id):
                     return jsonify(error_ID)
 
                 busqueda_pokemon = model.get_one_pokemon(query)
+
+                if (request.form.get('numero')):
+                    numero = request.form['numero']
+                else:
+                    numero = busqueda_pokemon.get('num')
+
+                if (request.form.get('nombre')):
+                    nombre = request.form['nombre']
+                else:
+                    nombre = busqueda_pokemon.get('name')
+
+                if (request.form.get('img')):
+                    img = request.form['img']
+                else:
+                    img = busqueda_pokemon.get('img')
 
                 if (busqueda_pokemon):
                     valor_nuevo = { "$set": { "num": numero, "name": nombre, "img": img }}
