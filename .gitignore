@@ -1,3 +1,6 @@
+# De momento no quiero subir el script para comprobar funcionamiento de la API
+api_requests.sh
+
 # Ficheros dentro del directorio datos_db que no queremos que se suban:
 collection-0-*
 collection-2-*
