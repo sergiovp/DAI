@@ -136,3 +136,11 @@ body > div > div > div > div > img {
     width: 120px;
     height: 120px;
 }
+
+body.dark-mode #txt > div > div > div > div > p > a {
+    color: azure;
+}
+
+#txt > div > div > div > div > p > a {
+    color: blue;
+}
