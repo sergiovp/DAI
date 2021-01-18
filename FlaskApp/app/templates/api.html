@@ -37,39 +37,58 @@
             let letrasFormulario = $(this).val();
 
             $.ajax({
-            // Petición a la API, verbo GET y obtenemos un JSON
-            url: `http://localhost:5000/api/filtro_pokemon?name=${letrasFormulario}`,
-            type : 'GET',
-            dataType : 'json',
+                // Petición a la API, verbo GET y obtenemos un JSON
+                url: `http://localhost:5000/api/filtro_pokemon?name=${letrasFormulario}`,
+                type : 'GET',
+                dataType : 'json',
 
-	        success: function(datos) {
-                let HTMLMostrar = '<div class="container" style="text-align: center;"><div class="row">';
-                let pares = false;
-                $.each(datos, function (i, valor) {
-                    if (pares) {
-                        HTMLMostrar += '<div class="pokemon-pares"><div class="colum">';
-                        pares = false;
-                    } else {
-                        HTMLMostrar += '<div class="pokemon-impares"><div class="colum">';
-                        pares = true;
-                    }
+                success: function(datos) {
+                    let HTMLMostrar = '<div class="container" style="text-align: center;"><div class="row">';
+                    let pares = false;
+                    $.each(datos, function (i, valor) {
+                        if (pares) {
+                            HTMLMostrar += '<div class="pokemon-pares"><div class="colum">';
+                            pares = false;
+                        } else {
+                            HTMLMostrar += '<div class="pokemon-impares"><div class="colum">';
+                            pares = true;
+                        }
 
-                    HTMLMostrar += `<img src="${valor.img}">`;
-                    HTMLMostrar += `<p>${valor.numero} | ${valor.nombre}</p>`;
-                    HTMLMostrar += `<p><a href="">Eliminar</a></p>`;
+                        HTMLMostrar += `<img src="${valor.img}">`;
+                        HTMLMostrar += `<p>${valor.numero} | ${valor.nombre}</p>`;
+                        HTMLMostrar += `<p><a role="button" style="color: blue;" onclick="eliminar('${valor.id}')">Eliminar</a></p>`;
+                        HTMLMostrar += '</div></div>';
+                    });
                     HTMLMostrar += '</div></div>';
-                });
-                HTMLMostrar += '</div></div>';
-                document.getElementById("txt").innerHTML = HTMLMostrar;
-            },
+                    document.getElementById("txt").innerHTML = HTMLMostrar;
+                },
 
-	        error: function() {
-                console.log("No se ha podido obtener la información");
-            }
+                error: function() {
+                    console.log("No se ha podido obtener la información");
+                }
+            });
         });
-        });
-        
     });
+
+    function eliminar(id) {
+        $(function () {
+            //console.log(id);
+            $.ajax({
+                url: `http://localhost:5000/api/del_pokemon/${id}`,
+                type : 'DELETE',
+                dataType : 'json',
+
+                success: function(datos) {
+                    
+                },
+
+                error: function() {
+                    //console.log("No se ha podido obtener la información");
+                }
+
+            });
+        });
+    }
 </script>
 
 </div>
