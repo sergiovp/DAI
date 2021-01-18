@@ -574,7 +574,8 @@ def api_filtro_pokemon():
                     lista_pokemon.append ({
                         'id':    str(pokemon.get('_id')),
                         'numero': pokemon.get('num'), 
-                        'nombre':  pokemon.get('name')
+                        'nombre':  pokemon.get('name'),
+                        'img': pokemon.get('img')
                     })
 
                 if (lista_pokemon):
@@ -682,3 +683,13 @@ def api_mod_pokemon(_id):
 
     else:
         return jsonify(error_verbo_peticion), 400
+
+############################
+# Práctica 8:
+############################
+
+@app.route('/api')
+def api():
+    usuario = get_user_session()
+
+    return render_template('api.html', usuario = usuario)
