@@ -64,7 +64,9 @@
                 },
 
                 error: function() {
-                    console.log("No se ha podido obtener la información");
+                    let HTMLMostrar = `<h4 style="color:red; text-align: center;">
+                        No se encontró información para '${letrasFormulario}'.</h3>`;
+                    document.getElementById("txt").innerHTML = HTMLMostrar;
                 }
             });
         });
