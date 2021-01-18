@@ -13,6 +13,10 @@
         crossorigin="anonymous">
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous">
+    </script>
     <title>{% block titulo %}Bienvenido{% endblock %}</title>
     
     <!--El siguiente bloque es por si es necesario añadir algún link en alguna página-->
@@ -52,6 +56,12 @@
                 <li class="nav-item">
                 {% endblock %}
                     <a class="nav-link" href="{{ url_for('pokedex')}}">Pokédex</a>
+                </li>
+
+                {% block item_api %}
+                <li class="nav-item">
+                {% endblock %}
+                    <a class="nav-link" href="{{ url_for('api')}}">API<span class="sr-only">(current)</span></a>
                 </li>
 
                 {% block item_ejercicios %}
@@ -174,6 +184,7 @@
 {% block contenido_principal_inicio %}{% endblock %}
 {% block contenido_formulario_ejercicios %}{% endblock %}
 {% block contenido_formulario_login %}{% endblock %}
+{% block contenido_api %}{% endblock %}
 
    <!--Footer. Será el mismo para todas las páginas (heredado) salvo registro y login-->
 {% block footer %}
@@ -203,16 +214,7 @@
                 autor Sergio Vela Pelegrina (sergiovp96@gmail.com)</p>
         </section>
     </footer>
-{% endblock %} <!--Footer-->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
-        crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-        crossorigin="anonymous">
-    </script>
+{% endblock %} <!--Footer-->    
 
 </body>
 </html>
