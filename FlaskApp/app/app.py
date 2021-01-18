@@ -567,7 +567,7 @@ def api_filtro_pokemon():
                 # Nos quedamos con el nombre introducido para la expresión regular
                 parametros = request.args['name']
                 expresion = parametros + '.*'
-                query = { "name": {"$regex": expresion}}
+                query = { "name": {"$regex": expresion, "$options": 'i' }}
                 coleccion_pokemon = model.get_pokemon(query)
 
                 for pokemon in coleccion_pokemon:
