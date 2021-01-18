@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
+    // Al introducir caracteres en el buscador
     $('#buscar').keyup(function() {
         let letrasFormulario = $(this).val();
 
         $.ajax({
-            // Petición a la API, verbo GET y obtenemos un JSON
+            // Petición a la API, obtenemos los Pokémon cuyo nombre coincida con el introducido
             url: `http://localhost:5000/api/filtro_pokemon?name=${letrasFormulario}`,
             type : 'GET',
             dataType : 'json',
