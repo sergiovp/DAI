@@ -346,7 +346,7 @@ def pokedex():
     if (request.method == 'POST'):
         parametros = request.form['pokemon-introducido']
         expresion = parametros + '.*'
-        query = { "name": {"$regex": expresion}}
+        query = { "name": {"$regex": expresion, "$options": 'i'}}
         coleccion_pokemon = model.get_pokemon(query)
     else:
         # Encontramos los documentos de la coleccion "samples_pokemon"
