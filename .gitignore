@@ -2,22 +2,22 @@
 api_requests.sh
 
 # Ficheros dentro del directorio datos_db que no queremos que se suban:
-collection-0-*
-collection-2-*
-collection-4-*
-collection-7-*
-diagnostic.data
-index-1-*
-index-3-*
-index-5-*
-index-6-*
-index-8-*
-journal
-WiredTiger*
-storage.bson
-sizeStorer.wt
-mongod.lock
-_mdb_catalog.wt
+#collection-0-*
+#collection-2-*
+#collection-4-*
+#collection-7-*
+#diagnostic.data
+#index-1-*
+#index-3-*
+#index-5-*
+#index-6-*
+#index-8-*
+#journal
+#WiredTiger*
+#storage.bson
+#sizeStorer.wt
+#mongod.lock
+#_mdb_catalog.wt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
