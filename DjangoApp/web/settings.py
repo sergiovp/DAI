@@ -24,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'd#bp4ijbg#v*z&x_khtu1ofu4k!fe1f_01!=@nui9nf%d-3r#d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+'''
+    Tal y como nos dice el comentario anterior, para desplegar la app en producción,
+    pondremos el DEBUG a false y permitir todos los hosts.
+'''
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
