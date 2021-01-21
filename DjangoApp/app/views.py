@@ -78,7 +78,7 @@ def reservar_libro(request, identificador):
     prestamo.save()
     libros = Libros.objects.all()
 
-    return render(request, 'libros.html', {'libros': libros, 'usuario': usuario})
+    return redirect('libros')
 
 def modificar_libro(request, identificador):
     global usuario
@@ -104,7 +104,7 @@ def modificar_libro(request, identificador):
 
                 libros = Libros.objects.all()
 
-                return render(request, 'libros.html', {'libros': libros, 'usuario': usuario})
+                return redirect('libros')
 
     else:
         form = set_libro_form()
@@ -121,7 +121,7 @@ def eliminar_libro(request, identificador):
 
     libros = Libros.objects.all()
 
-    return render(request, 'libros.html', {'libros': libros, 'usuario': usuario})
+    return redirect('libros')
 
 def eliminar_reserva(request, identificador_prestamo, identificador_libro):
     global usuario
