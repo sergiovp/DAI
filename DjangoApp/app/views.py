@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .forms import *
 from .models import *
 
@@ -49,7 +49,7 @@ def add_libro(request):
         if (form.is_valid()):
             form.save()
             libros = Libros.objects.all()
-            return render(request, 'libros.html', {'libros': libros, 'usuario': usuario})
+            return redirect('libros')
 
     else:
         form = add_libro_form()
