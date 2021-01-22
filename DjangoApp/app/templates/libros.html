@@ -24,7 +24,7 @@
         {% for i in libros %}
                 <div class="libros">
                     <div class="colum" id="libro">
-                        <img id="img_libro" src="../../media/{{ i.libro_img }}" alt="Imagen libro"/>
+                        <img id="img_libro" src="{{ i.img_url }}" alt="Imagen portada">
                         <p>Título: <span class="datos_libro">{{ i.titulo }}</span></p>
                         <p>Autor: <span class="datos_libro">{{ i.autor }}</p></span>
                         <p>Año: <span class="datos_libro">{{ i.anio }}</p></span>
