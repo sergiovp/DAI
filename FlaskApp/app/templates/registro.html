@@ -4,10 +4,19 @@
 
 {% block formulario %}
         <form method="POST">
+            <div id="mensaje"></div>
+            <p id="mensaje_usuario" class="mensaje_u" style="color: red;">¡El nombre de usuario ya está en uso!</p>
             <input type="text" id="login" class="fadeIn second"
                 name="usuario" placeholder="Usuario..." value="{{request.form.username }}">
+                <script src="{{ url_for('static', filename='js/validacion_registro.js') }}"></script>
             <input type="password" id="password" class="fadeIn third"
                 name="password" placeholder="Contraseña...">
             <input type="submit" class="fadeIn fourth" value="Registro">
         </form>
+
+        {% for i in nombres_usuarios %}
+            <p class="usuarios">{{i}}</p>
+        {% endfor %}
+
+
 {% endblock %}
