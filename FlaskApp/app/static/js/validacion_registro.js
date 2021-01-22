@@ -13,8 +13,6 @@ $(document).ready(function() {
                 document.getElementById('mensaje_usuario').style.display = 'block';
                 break;
             } else {
-                console.log("letras: ", letrasFormulario);
-                console.log("usuario:", usuarios[i]);
                 document.getElementById('mensaje_usuario').style.display = 'none';
             }
         }
