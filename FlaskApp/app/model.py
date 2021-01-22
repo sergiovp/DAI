@@ -9,6 +9,9 @@ def start_db():
 # Variable global BD
 data_base = start_db()
 
+def get_users():
+    return data_base.keys()
+
 def check_key_exists(key):
     return (key in data_base.keys())
 
