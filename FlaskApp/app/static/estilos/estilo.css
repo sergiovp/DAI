@@ -144,3 +144,11 @@ body.dark-mode #txt > div > div > div > div > p > a {
 #txt > div > div > div > div > p > a {
     color: blue;
 }
+
+.usuarios {
+    display: none;
+}
+
+.mensaje_u {
+    display: none;
+}
