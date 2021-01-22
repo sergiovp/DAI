@@ -38,6 +38,11 @@ localhost
 >> 1. Si altera ficheros Dockerfile o docker-compose.yml, puede reconstruirlos con `make build`
 >> 2. Si altera los modelos de la app, ejecute `make migrations` y `make migrate`
 
+Usuarios:
+
++ admin admin
++ vela vela
++ pepe pepe
 
 ## Práctica 1 y 2. Python y entorno de trabajo con docker y Microframework Flask.
 
