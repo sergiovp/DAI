@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.templatetags.static import static
 
 # Create your models here.
 
@@ -8,7 +9,11 @@ class Libros(models.Model):
     autor  = models.CharField(max_length = 50)
     anio = models.IntegerField()
     reservado = models.BooleanField(default = False)
-    libro_img = models.ImageField(upload_to = 'images/')
+    libro_img = models.ImageField()
+
+    @property
+    def img_url(self):
+        return static("media/{}".format(self.libro_img))
 
     def __str__(self):
         return "%s %s %i %i" % (self.titulo, self.autor, self.anio, self.reservado)
