@@ -7,7 +7,7 @@ Repositorio dedicado a la asignatura Desarrollo de Aplicaciones para Internet cu
 
 En el directorio [docs](https://github.com/sergiovp/DAI/tree/master/docs) encontrarás documentación relativa al desarrollo de las prácticas de la asignatura, así como los objetivos a cumplir en cada una de éstas.
 
-## Despliegue
+## Despliegue aplicación Django
 
 > Nota: Como requisito es necesario tener instalado **git**, **docker** y **docker-compose**.
 
@@ -16,17 +16,27 @@ Clonamos el repositorio:
 git clone https://github.com/sergiovp/DAI
 ~~~
 
+Nos movemos hacia el directorio de la aplicación:
+~~~
+cd DAI/DjangoApp/
+~~~
+
 Ejecutamos la aplicación:
 ~~~
 make
 ~~~
 
-> Nota: la orden 'make' levantará el contenedor haciendo `docker-compose up`.
+> La orden 'make' levantará el contenedor haciendo `docker-compose up`
 
-Desde el navegador ponemos la URL:
+Desde el navegador accedemos a la app:
 ~~~
-localhost:5000
+localhost
 ~~~
+
+> Notas:
+>> 1. Si altera ficheros Dockerfile o docker-compose.yml, puede reconstruirlos con `make build`
+>> 2. Si altera los modelos de la app, ejecute `make migrations` y `make migrate`
+
 
 ## Práctica 1 y 2. Python y entorno de trabajo con docker y Microframework Flask.
 
