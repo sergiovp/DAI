@@ -212,8 +212,10 @@ def registro():
             start_session(usuario, password)
             
             return render_template('index.html', usuario = usuario)
+    
+    nombres_usuarios = model.get_users()
 
-    return render_template('registro.html', error = error)
+    return render_template('registro.html', error = error, nombres_usuarios = nombres_usuarios)
 
 @app.route('/ver_datos')
 def ver_datos():
