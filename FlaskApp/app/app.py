@@ -17,6 +17,7 @@ import model
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['JSON_AS_ASCII'] = False
+
 ############################
 # Práctica 1 y 2:
 ############################
@@ -695,3 +696,9 @@ def api():
     usuario = get_user_session()
 
     return render_template('api.html', usuario = usuario)
+
+@app.route('/mapa')
+def mapa():
+    usuario = get_user_session()
+
+    return render_template('mapa.html', usuario = usuario)
