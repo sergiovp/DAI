@@ -22,3 +22,11 @@ function getMapa(latitud = null, longitud = null) {
         radius: 600
     }).addTo(mymap);
 }
+
+function getLatitud() {
+    return document.getElementById('latitud').innerHTML;
+}
+
+function getLongitud() {
+    return document.getElementById('longitud').innerHTML;
+}
