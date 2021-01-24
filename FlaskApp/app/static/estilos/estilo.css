@@ -158,3 +158,7 @@ body.dark-mode #txt > div > div > div > div > p > a {
 #mapid {
     height: 450px;
 }
+
+#latitud, #longitud {
+    display: none;
+}
