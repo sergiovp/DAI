@@ -11,11 +11,17 @@
 {% endblock %}
 
 {% block contenido_mapa %}
-<div id="mapid" style="height: 180px;">
+<div id="mapid">
 </div>
 
+<!-- latitud y longitud se rellenarán con jinja con lo que le pasemos de la función -->
+<p id="latitud">{{ latitud }}</p>
+<p id="longitud">{{ longitud }}</p>
+
 <script>
-    getMapa(37.18817, -3.60667);
+    const latitud = getLatitud();
+    const longitud = getLongitud();
+    getMapa(latitud, longitud);
 </script>
 
 {% endblock %}
