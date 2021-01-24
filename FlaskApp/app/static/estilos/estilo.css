@@ -152,3 +152,9 @@ body.dark-mode #txt > div > div > div > div > p > a {
 .mensaje_u {
     display: none;
 }
+
+/* ESTILOS MAPA */
+
+#mapid {
+    height: 450px;
+}
