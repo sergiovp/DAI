@@ -2,6 +2,10 @@
 
 {% block titulo %}Mapa{% endblock %}
 
+{%block addlink %}
+    <script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+{% endblock %}
+
 {% block item_mapa %}
     <li class="nav-item active" style="font-weight: bold;">
 {% endblock %}
@@ -11,15 +15,7 @@
 </div>
 
 <script>
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoidmVsYTk2IiwiYSI6ImNra2EwdzA0cTBvMTEycXM5ZjVvcDVma3kifQ.V_7W1o8NfzV1Us7-aDkwbQ'
-}).addTo(mymap);
+    getMapa(37.18817, -3.60667);
 </script>
+
 {% endblock %}
