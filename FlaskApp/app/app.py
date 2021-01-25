@@ -389,6 +389,8 @@ def modificar_pokemon(_id):
     numero = busqueda_pokemon.get('num')
     nombre = busqueda_pokemon.get('name')
     img = busqueda_pokemon.get('img')
+    latitud = busqueda_pokemon.get('latitud')
+    longitud = busqueda_pokemon.get('longitud')
 
     if (request.method == 'POST'):
 
@@ -407,8 +409,19 @@ def modificar_pokemon(_id):
         else:
             nueva_imagen = img
 
-        if (nuevo_nombre or nuevo_numero or nueva_imagen):
-            valor_nuevo = { "$set": { "num": nuevo_numero, "name": nuevo_nombre, "img": nueva_imagen }}
+        if (request.form['nueva-latitud']):
+            nueva_latitud = request.form['nueva-latitud']
+        else:
+            nueva_latitud = latitud
+
+        if (request.form['nueva-longitud']):
+            nueva_longitud = request.form['nueva-longitud']
+        else:
+            nueva_longitud = longitud
+
+        if (nuevo_nombre or nuevo_numero or nueva_imagen or latitud or longitud):
+            valor_nuevo = { "$set": { "num": nuevo_numero, "name": nuevo_nombre, 
+                "img": nueva_imagen, "latitud": nueva_latitud, "longitud": nueva_longitud }}
 
             model.modificar_pokemon(query, valor_nuevo)
 
@@ -418,11 +431,12 @@ def modificar_pokemon(_id):
         else:
             mensaje = 'No has introducido nuevos valores, no hay nada que modificar'
             return render_template('modificar_pokemon.html', 
-                numero = numero, nombre = nombre, img = img, mensaje = mensaje)
+                numero = numero, nombre = nombre, img = img, latitud = latitud,
+                longitud = longitud, mensaje = mensaje)
 
     
     return render_template('modificar_pokemon.html', 
-        numero = numero, nombre = nombre, img = img)
+        numero = numero, nombre = nombre, img = img, latitud = latitud, longitud = longitud)
 
 @app.route('/aniadir_pokemon', methods=['GET', 'POST'])
 def aniadir_pokemon():
@@ -697,8 +711,25 @@ def api():
 
     return render_template('api.html', usuario = usuario)
 
-@app.route('/mapa')
-def mapa():
+############################
+# Práctica 10:
+############################
+
+@app.route('/mapa/<_id>/')
+def mapa(_id):
     usuario = get_user_session()
 
-    return render_template('mapa.html', usuario = usuario)
+    if (_id == str(0)):
+        return render_template('mapa.html', usuario = usuario, latitud = 0, longitud = 0)
+
+    try:
+        query = {"_id": ObjectId(_id) }
+    except:
+        return jsonify(error_ID)
+
+    pokemon = model.get_one_pokemon(query)
+
+    latitud = pokemon.get('latitud')
+    longitud = pokemon.get('longitud')
+
+    return render_template('mapa.html', usuario = usuario, latitud = latitud, longitud = longitud)
