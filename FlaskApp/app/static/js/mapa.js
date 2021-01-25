@@ -19,7 +19,7 @@ function getMapa(latitud = null, longitud = null) {
         color: 'red',
         fillColor: '#f03',
         fillOpacity: 0.5,
-        radius: 600
+        radius: 50000
     }).addTo(mymap);
 }
 
