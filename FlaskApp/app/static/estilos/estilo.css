@@ -167,3 +167,8 @@ body.dark-mode #txt > div > div > div > div > p > a {
     text-align: center;
     color: red;
 }
+
+#pk {
+    align-items: center;
+    display: inline;
+}
