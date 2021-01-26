@@ -21,7 +21,38 @@ function getMapa(latitud = null, longitud = null) {
             fillColor: '#f03',
             fillOpacity: 0.5,
             radius: 50000
-        }).addTo(mymap);
+        }).addTo(mymap).on('click', function () {
+           // Consulta API con todos los Pokémon
+           $(document).ready(function() {        
+                $.ajax({
+                    url: `http://localhost:5000/api/ubicacion?longitud=${longitud}`,
+                    type : 'GET',
+                    dataType : 'json',
+        
+                    success: function(datos) {
+                        let HTMLMostrar = '<h4 style="text-align: center;"> Estos son los Pokémon que podemos encontrar en esa zona: </h4>';
+                        HTMLMostrar += '<div class="container" style="text-align: center;"><div id="pk">';
+                        for (let i = 0; i < datos.length; i++) {
+                            if (i % 2 == 0) {
+                                HTMLMostrar += '<div class="pokemon-pares"><div class="colum">';
+                                HTMLMostrar += `<img src="${datos[i].img}" alt="">`;
+                                HTMLMostrar += `<p>${datos[i].numero} | ${datos[i].nombre}</p></div></div>`;
+                            } else {
+                                HTMLMostrar += '<div class="pokemon-impares"><div class="colum">';
+                                HTMLMostrar += `<img src="${datos[i].img}" alt="">`;
+                                HTMLMostrar += `<p>${datos[i].numero} | ${datos[i].nombre}</p></div></div>`;
+                            }
+                        }
+                        HTMLMostrar += '</div></div>';
+                        document.getElementById("mostrar-pokemon").innerHTML = HTMLMostrar;
+                    },
+        
+                    error: function() {
+                        console.log("Error");
+                    }
+                });
+            }); 
+        });
     } else {
         window.setInterval (parpadea, 500);
         var color = "red";
