@@ -3,18 +3,25 @@ $(document).ready(function() {
         let letrasFormulario = $(this).val();
         let usuarios = Array();
 
-        var usua = document.getElementsByClassName("usuarios");
-        for (let i = 0; i < usua.length; i++) {
-            usuarios.push(document.getElementsByClassName("usuarios")[i].innerHTML);
-        }
+        $.ajax({
+            url: `http://localhost:5000/api/usuarios`,
+            type : 'GET',
+            dataType : 'json',
 
-        for (let i = 0; i < usuarios.length; i++) {
-            if (letrasFormulario == usuarios[i]) {
-                document.getElementById('mensaje_usuario').style.display = 'block';
-                break;
-            } else {
-                document.getElementById('mensaje_usuario').style.display = 'none';
+            success: function(datos) {
+                for (let i = 0; i < datos.length; i++) {
+                    if (letrasFormulario == datos[i]) {
+                        document.getElementById('mensaje_usuario').style.display = 'block';
+                        break;
+                    } else {
+                        document.getElementById('mensaje_usuario').style.display = 'none';
+                    }
+                }
+            },
+
+            error: function() {
+                console.log("Error");
             }
-        }
+        });
     });
 });
