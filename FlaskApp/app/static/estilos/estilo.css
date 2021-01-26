@@ -156,9 +156,14 @@ body.dark-mode #txt > div > div > div > div > p > a {
 /* ESTILOS MAPA */
 
 #mapid {
-    height: 450px;
+    height: 500px;
 }
 
 #latitud, #longitud {
     display: none;
+}
+
+#pokemon-desconocido {
+    text-align: center;
+    color: red;
 }
