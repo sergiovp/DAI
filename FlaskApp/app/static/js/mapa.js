@@ -15,12 +15,32 @@ function getMapa(latitud = null, longitud = null) {
         accessToken: 'pk.eyJ1IjoidmVsYTk2IiwiYSI6ImNra2EwdzA0cTBvMTEycXM5ZjVvcDVma3kifQ.V_7W1o8NfzV1Us7-aDkwbQ'
     }).addTo(mymap);
 
-    var circle = L.circle([latitud, longitud], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 50000
-    }).addTo(mymap);
+    if (latitud != -1 && longitud != -1) {
+        var circle = L.circle([latitud, longitud], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 50000
+        }).addTo(mymap);
+    } else {
+        window.setInterval (parpadea, 500);
+        var color = "red";
+
+        function parpadea () {
+            let brilla = document.getElementById ("pokemon-desconocido");
+
+            if (localStorage.getItem('isDarkMode') == 'true') {
+                color = (color == "#ffffff")? "red" : "#ffffff";
+                brilla.style.color = color;
+                brilla.style.fontSize='36px';
+            } else {
+                color = (color == "#000000") ? "red" : "#000000";
+                brilla.style.color = color;
+                brilla.style.fontSize='36px';
+            }
+        }
+        document.getElementById('pokemon-desconocido').innerHTML = "<h1>¡UBICACIÓN DESCONOCIDA!</h1>";
+    }
 }
 
 function getLatitud() {
