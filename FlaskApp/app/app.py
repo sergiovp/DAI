@@ -733,3 +733,52 @@ def mapa(_id):
     longitud = pokemon.get('longitud')
 
     return render_template('mapa.html', usuario = usuario, latitud = latitud, longitud = longitud)
+
+'''
+    Definimos la función para llamarla con AJAX desde el frontend y obtener todos los Pokémon
+    cuyo campo 'longitud' coincida con la que le pasamos en la URL.
+    La llamada a esta función la haremos desde el mapa.js.
+'''
+@app.route('/api/ubicacion', methods = ['GET', 'POST', 'PUT','DELETE'])
+def api_ubicacion():
+    parametros = ''
+
+    # En este caso, igual que el GET del método anterior pero filtrando por nombre
+    if (request.method == 'GET'):
+
+        # Hay parámetros en la petición
+        if (request.args):
+
+            # Está el parámetro 'name'
+            if (request.args.get('longitud')):
+
+                lista_pokemon = []
+                # Nos quedamos con el nombre introducido para la expresión regular
+                longitud = request.args['longitud']
+                #expresion = parametros #+ '.*'
+                query = { "longitud": longitud }
+                coleccion_pokemon = model.get_pokemon(query)
+
+                for pokemon in coleccion_pokemon:
+                    lista_pokemon.append ({
+                        'id':    str(pokemon.get('_id')),
+                        'numero': pokemon.get('num'), 
+                        'nombre':  pokemon.get('name'),
+                        'img': pokemon.get('img')
+                    })
+
+                if (lista_pokemon):
+                    return jsonify(lista_pokemon)
+
+                else:
+                    return jsonify(error_BD), 404
+            else:
+                return jsonify(error_parametros_incorrectos2), 400
+
+        # No Hay parámetros en la petición
+        else:
+            return jsonify(error_no_parametros), 400
+    
+    # Verbo erróneo
+    else:
+        return jsonify(error_verbo_peticion), 400
