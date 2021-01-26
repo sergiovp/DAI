@@ -213,10 +213,8 @@ def registro():
             start_session(usuario, password)
             
             return render_template('index.html', usuario = usuario)
-    
-    nombres_usuarios = model.get_users()
 
-    return render_template('registro.html', error = error, nombres_usuarios = nombres_usuarios)
+    return render_template('registro.html', error = error)
 
 @app.route('/ver_datos')
 def ver_datos():
@@ -778,6 +776,26 @@ def api_ubicacion():
         # No Hay parámetros en la petición
         else:
             return jsonify(error_no_parametros), 400
+    
+    # Verbo erróneo
+    else:
+        return jsonify(error_verbo_peticion), 400
+
+'''
+    En este caso, la función devolverá todos los nombres de usuario almacenados.
+    Llamaremos a la función en registro.html para comprobar en tiempo real si el
+    nombre de usuario está o no en uso.
+'''
+@app.route('/api/usuarios', methods = ['GET', 'POST', 'PUT','DELETE'])
+def api_usuarios():
+
+    if (request.method == 'GET'):
+        nombres_usuarios = model.get_users()
+
+        if (nombres_usuarios):
+            return jsonify(nombres_usuarios)
+        else:
+            return jsonify(error_BD), 404
     
     # Verbo erróneo
     else:
